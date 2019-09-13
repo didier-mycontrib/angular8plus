@@ -1,0 +1,27 @@
+[
+    {
+      "context" : [ "/news-api" ]  ,
+      "secure" : "false" ,
+      "target" : "http://localhost:8282" 
+    },
+    {
+    "context" : [ "/devise-api" ]  ,
+    "secure" : "false" ,
+    "target" : "http://localhost:8282" 
+    },
+    {
+        "context" : [ "/login-api" ]  ,
+        "secure" : "false" ,
+        "target" : "http://localhost:8282" 
+        },
+    {
+        "context" : [ "/auth-api" ]  ,
+        "secure" : "false" ,
+        "target" : "http://localhost:8282" 
+        },
+    {   
+        "context" : [ "/images" , "/posts" ]  ,
+        "secure" : "false" ,
+        "target" : "http://localhost:8282" 
+    }
+]

@@ -1,0 +1,68 @@
+<div class="card" [style.display]="authService.lastAuthResponse?'block':'none'">
+    <div class="card-header  my-bg-primary  appuye">
+      <h4 class="text-white">last suceeding login</h4>
+    </div>
+    <div class="card-body fondParDefaut">
+         <p>username=<b>{{authService.lastAuthResponse?.username}}</b> , 
+         roles=<b>{{authService.lastAuthResponse?.roles}}</b></p>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header  my-bg-primary  appuye">
+      <h4 class="text-white">Login (AuthRequest)</h4>
+    </div>
+    <div class="card-body fondParDefaut">
+
+      <form role="form" #formLogin="ngForm" (mouseenter)="onFormInit()"
+             id="formLogin" class="form-horizontal">
+
+             <bsu-my-fg-label [label]="'username'">
+                    <input type="text" class="form-control" required
+                           name="username" [(ngModel)]="authRequest.username" />
+            </bsu-my-fg-label>
+
+            <bsu-my-fg-label [label]="'password'">
+                    <input type="text" class="form-control" required
+                           name="password" [(ngModel)]="authRequest.password" />
+            </bsu-my-fg-label>
+
+            <bsu-my-fg-label [label]="'roles'">
+                    <input type="text" class="form-control" required
+                           name="roles" [(ngModel)]="authRequest.roles" />
+            </bsu-my-fg-label>
+
+            <div class="form-group row">
+                    <div class="col-sm-offset-3 col-sm-9">
+                    <input  type="submit" class="btn my-bg-primary text-white" 
+                            [disabled]="!formLogin.form.valid" value="login" 
+                            (click)="onSubmit()" /> &nbsp;&nbsp; <span class="error">{{errorMsg}}</span> 
+                    </div>
+            </div>
+
+      </form>
+    </div>
+    <div class="card-footer  my-bg-secondary">
+                <p>exemple1: (username=publisher1,password=pwdpublisher1,roles=publisher)</p>
+                <p>exemple2: (username=admin1,password=pwdadmin1,roles=admin)</p>
+    </div>
+
+    <div class="card" [style.display]="authResponse!=null?'block':'none'">
+                <div class="card-header  my-bg-primary  appuye">
+                  <h4 class="text-white">AuthResponse</h4>
+                </div>
+                <div class="card-body fondParDefaut">
+                       <div [style.display]="(authResponse?.status)?'block':'none'">
+                           <p class = "success"> {{authResponse?.message}} </p>
+                           <p>authentication token (jwt): <b>{{authResponse?.token}}</b> now in sessionStorage</p>
+                           <p>will be sent as "Bearer token" in subsequents requests as proof of succeeding authentication
+                              of <b>{{authResponse?.username}}</b> with roles=<b>{{authResponse?.roles}}</b>                                   
+                           </p>
+                      </div>
+                      <div [style.display]="(authResponse?.status)?'none':'block'">
+                            <p class = "error"> {{authResponse?.message}} </p>
+                            <p><b>null</b> authentication token (jwt) now in sessionStorage</p>
+                      </div>
+                </div>
+     </div>
+
+</div>

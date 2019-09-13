@@ -1,0 +1,5 @@
+<h3>products of category={{categorie}}</h3>
+<table border="1">
+    <tr><th>label</th><th>prix</th></tr>
+    <tr *ngFor="let p of products"><td>{{p.label}}</td><td>{{p.price}}</td></tr>
+</table>

@@ -1,0 +1,148 @@
+/* _base.scss = variables + mixins , @import in styles.scss */
+
+//$default-theme : "blue-theme";
+//or
+$default-theme : "green-theme";
+//or ...
+
+//named color map:
+//exemple : background-color: map-get($colors,"primary")
+//                         or : map-get($colors,primary)
+//
+//txt-xxx = couleur du texte (ex: sur fond clair)
+//bg-xxx = couleur du fond (ex: foncé pour menu , encadrement, bouton)  
+//bg-inv-xxx =couleur de fond inversé (pour contraste contenu textuel ...)
+//txt-inv-xxx = couleur du texte inversé (ex: texte de bouton)
+//REGLE DE CONTRASTE : txt-xxx ok avec bg-inv-xxx
+//                     txt-inv-xxx ok avec bg-xxx
+//REGLE d'HARMONIE : primary , secondary , ... doivent cohabiter harmonieusement
+//utilisation-type : card avec titre (txt-inv-xxx sur fond bg-xxx)
+//                     et avec contenu (txt-xxx sur fond bg-inv-xxx) 
+
+$basic-colors: (
+  txt-default:   #000000,
+  bg-inv-default: #ffffff,
+  bg-default:    #031c46,
+  txt-inv-default:  #ffffff,
+
+  txt-alternative: #031c46,
+  bg-inv-alternative: #ffffff,
+  bg-alternative:  #413f3f,
+  txt-inv-alternative:  #ffffff,
+
+  txt-success:    #10a328,
+  bg-inv-success:    #ffffff,
+  bg-success:    #10a328,
+  txt-inv-success:    #ffffff,
+
+  txt-danger:     #f53d3d,
+  bg-inv-danger:     #ffffff,
+  bg-danger:     #f53d3d,
+  txt-inv-danger:     #ffffff,
+
+  txt-warning:    #df8116,
+  bg-inv-warning:    #ffffff,
+  bg-warning:    #df8116,
+  txt-inv-warning:    #ffffff,
+
+  txt-info:       #488aff,
+  bg-inv-info:       #ffffff,
+  bg-info:       #488aff,
+  txt-inv-info:       #ffffff,
+
+  light:      #f4f4f4,
+  dark:       #222,
+  white:      #ffffff,
+  bg-transparent: transparentize(#ffffff,1)
+);
+
+$custom-colors: (
+  my-dark:   #000000,
+  my-white: #ffffff,
+  my-blue:    #031c46,
+  my-green:    #10a328,
+  my-red:     #f53d3d,
+  my-orange:    #df8116,
+  my-light-blue:       #488aff,
+);
+
+$colors-by-theme:( 
+  blue-theme :(
+      txt-primary:   #000000,
+      bg-inv-primary: #ffffff,
+      bg-primary:    #031c46,
+      txt-inv-primary:  #ffffff,
+
+      txt-secondary: #031c46,
+      bg-inv-secondary: #ffffff,
+      bg-secondary:  #413f3f,
+      txt-inv-secondary:  #ffffff,
+
+      txt-secondary2: #46032c,
+      bg-inv-secondary2: #ffffff,
+      bg-secondary2:  #413f3f,
+      txt-inv-secondary2:  #ffffff
+      ),
+    green-theme :(
+        txt-primary:   #000000,
+        bg-inv-primary: #ffffff,
+        bg-primary:    #4caf50,
+        txt-inv-primary:  #ffffff,
+  
+        txt-secondary: #031c46,
+        bg-inv-secondary: #ffffff,
+        bg-secondary:  #413f3f,
+        txt-inv-secondary:  #ffffff,
+
+        txt-secondary2: #70500a,
+        bg-inv-secondary2: #ffffff,
+        bg-secondary2:  #413f3f,
+        txt-inv-secondary2:  #ffffff
+        )
+);
+//+eventuellement secondary3 et secondary4 en harmonie
+//NB: on pourra appliquer les variantes suivantes
+//    sur xxx=primary ou secondary ou secondary2 , ...
+//    lighten(myColor(...),10_ou_20%)
+//    darken(myColor(...),10_ou_20%)
+
+
+
+//exemple : background-color: basicColor("bg-default")
+//or background-color: basicColor(bg-default)
+@function basicColor($colorNameOrColorKey) { 
+  @return map-get($basic-colors,$colorNameOrColorKey); 
+} 
+
+//exemple : background-color: customColor("my-red")
+//or background-color: customColor(my-red)
+@function customColor($colorNameOrColorKey) { 
+  @return map-get($custom-colors,$colorNameOrColorKey); 
+}
+
+//exemple : background-color: colorOfTheme("bg-primary","blue-theme")
+//or background-color: colorOfTheme(bg-primary,blue-theme)
+@function colorOfTheme($colorNameOrColorKey,$themeNameOrKey) { 
+  @return map-get(map-get($colors-by-theme,$themeNameOrKey),$colorNameOrColorKey); 
+}
+
+
+//exemple : background-color: defaultThemeColor("bg-primary")
+//or background-color: defaultThemeColor(bg-primary)
+@function defaultThemeColor($colorNameOrColorKey) { 
+  @return map-get(map-get($colors-by-theme,$default-theme),$colorNameOrColorKey); 
+}
+
+//exemple : background-color: myColor("bg-primary")
+//or background-color: myColor(bg-primary)
+@function myColor($colorNameOrColorKey) { 
+  $res : defaultThemeColor($colorNameOrColorKey);
+  @if($res == null){
+    $res : basicColor($colorNameOrColorKey);
+  }
+  @if($res == null){
+    $res : customColor($colorNameOrColorKey);
+  }
+  @return $res;
+}
+

@@ -1,0 +1,14 @@
+<div class="my-news-content">
+    <div class="row row-eq-height">
+        <div class="col-sm-6  mb-2"
+                       *ngFor="let ctxCard of contextCardsNews" >
+            <bsu-overview-card 
+                            [title]="ctxCard.title"
+                            [smallInnerHtmlText]="ctxCard.texte"
+                            [bigModalInnerHtmlText]="ctxCard.large_html_text"
+                            [footer]="ctxCard.footer">
+            </bsu-overview-card>
+        </div>
+    </div>
+</div>
+

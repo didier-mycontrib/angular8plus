@@ -1,0 +1,8 @@
+//import of partials _bases.scss , _layout.scss , _component.scss 
+
+@import "common"; //indirectly "base" + "layout" + "component"
+
+
+html, body { height: 100%; }
+body { background-color: myColor("bg-primary") ;
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

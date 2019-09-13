@@ -1,0 +1,20 @@
+<h3> statistiques confidentielles pour admin (sur ventes ou ...) </h3>
+<div class="row">
+  <div class="col-sm-3">
+    <table border="1">
+            <tr><th>annee</th><th>valeur</th></tr>
+            <tr *ngFor="let s of stats">
+              <td>{{s.year}}</td><td>{{s.value}}</td>
+            </tr>
+    </table>
+ </div>
+ <div class="col-sm-9">
+    <canvas baseChart 
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [legend]="chartLegend"
+      [chartType]="chartType" >
+    </canvas>
+   </div>
+</div>

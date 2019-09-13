@@ -1,0 +1,16 @@
+<div class="navbar navbar-expand-sm navbar-light bg-faded fondParDefaut">
+  <button class="navbar-toggler" type="button" 
+         (click)="isNavbarCollapsed = !isNavbarCollapsed">
+          <span class="navbar-toggler-icon"></span>
+  </button>
+
+      <a class="my-nav-brand text-white my-bg-primary  titre0" [routerLink]="['/ngr/welcome']" >
+		       {{brandTitle}}
+	    </a>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" [collapse]="isNavbarCollapsed" >
+      <ul class="nav navbar-nav">
+        <bsu-nav-item *ngFor="let mDef of menuDefs" [menuDef]="mDef"></bsu-nav-item>
+	    </ul>
+    </div><!-- /.navbar-collapse -->
+  </div> <!-- /.navbar -->

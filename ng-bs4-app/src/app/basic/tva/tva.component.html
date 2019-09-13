@@ -1,0 +1,19 @@
+<div>
+<form role="form"  class="form-horizontal" >
+<bsu-my-fg-label label='ht'>
+    <input name="ht" [(ngModel)]="ht" (input)="onCompute()" class="form-control"/> 
+</bsu-my-fg-label> 
+<bsu-my-fg-label label='taux'>
+    <select name="taux" [(ngModel)]="taux" 
+            class="form-control" (change)="onCompute()">
+         <option *ngFor="let t of listeTaux">{{t}}</option>   
+    </select>  
+</bsu-my-fg-label> 
+<bsu-my-fg-label label='tva'>
+    <span>{{tva}}</span> 
+</bsu-my-fg-label> 
+<bsu-my-fg-label label='ttc'>
+    <span>{{ttc}}</span> 
+</bsu-my-fg-label> 
+</form>
+</div>

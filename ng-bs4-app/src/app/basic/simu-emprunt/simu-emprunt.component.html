@@ -1,0 +1,37 @@
+<div>
+   <form role="form"  class="form-horizontal" >
+        <bsu-my-fg-label label='montant'>
+            <input name="montant" [(ngModel)]="emprunt.montant" (input)="onCompute()" class="form-control"/> 
+        </bsu-my-fg-label> 
+        <bsu-my-fg-label label='taux annuel(%)'>
+            <input name="tauxAnnuel" [(ngModel)]="emprunt.tauxAnnuel" 
+                    class="form-control" (input)="onCompute()" />                 
+        </bsu-my-fg-label> 
+        <bsu-my-fg-label label='duree'>
+                <select name="duree" [(ngModel)]="emprunt.nbMois" 
+                        class="form-control" (change)="onCompute()" >
+                    <option *ngFor="let n of [3,6,9]" [value]="n">{{n}} mois</option>
+                    <option *ngFor="let n of [12,24,36,48,60,120]" [value]="n">{{ n / 12 }} an(s)</option>
+                </select>                                         
+        </bsu-my-fg-label>
+        <bsu-my-fg-label label='mensualite'>
+            <span>{{emprunt.mensualite | number:'1.0-2' }}</span> 
+        </bsu-my-fg-label>
+        <bsu-my-fg-label label='assurance'>
+                <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="checkbox" name="avecAssurance" class="form-check-input" [(ngModel)]="emprunt.avecAssurance" (click)="onComputeAssurance()" >avec assurance
+                        </label>
+                </div>             
+        </bsu-my-fg-label> 
+        <bsu-my-fg-label label='tauxAssurance' *ngIf="emprunt.avecAssurance">
+                <input name="tauxAssurance" [(ngModel)]="emprunt.tauxAssurance" (input)="onComputeAssurance()" class="form-control"/> 
+        </bsu-my-fg-label> 
+        <bsu-my-fg-label label='frais assurance mensuel' *ngIf="emprunt.avecAssurance">
+                <span>{{emprunt.mensualiteAssurance | number:'1.0-2'  }}</span> 
+        </bsu-my-fg-label>
+        <bsu-my-fg-label label='mensualite totale' *ngIf="emprunt.avecAssurance">
+                <span>{{emprunt.mensualiteAssurance + emprunt.mensualite | number:'1.0-2' }}</span> 
+        </bsu-my-fg-label>
+    </form>
+</div>

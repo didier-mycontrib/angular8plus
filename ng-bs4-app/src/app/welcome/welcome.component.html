@@ -1,0 +1,16 @@
+<div class="fondParDefaut row">
+   <div class="offset-2 col-8" >
+      <h3>WELCOME to Angular application</h3>
+      <carousel>
+            <slide *ngFor="let cd of myCarrouselDefs">
+               <a [routerLink]="[cd.path]" >
+                  <img [src]="cd.image" [alt]="cd.text" 
+                        style="display: block; width: 100%;">
+                  <div class="carousel-caption d-none d-md-block">
+                        <h4>{{cd.text}}</h4>
+                  </div>
+             </a>
+            </slide>
+         </carousel>
+   </div>
+</div>

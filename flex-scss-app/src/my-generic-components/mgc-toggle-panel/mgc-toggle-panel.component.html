@@ -1,0 +1,11 @@
+<div class="card">
+        <div class="header bg-info" >
+          <a class="text-light"  (click)="toggleP = !toggleP" >
+           <span [class.collapsible]="!toggleP"
+                 [class.active]="toggleP">{{title}}</span>
+          </a>
+        </div> 
+        <div class="body" [class.show]="toggleP" [class.hide]="!toggleP"> 		       
+               <ng-content></ng-content> 
+        </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="card">
+        <div class="card-header  my-bg-primary  appuye">
+          <h4 class="text-white">Produits du catalogue</h4>
+        </div>
+        <div class="card-body fondParDefaut">
+    
+       
+        <div class="row">
+         <div class="col-sm-4">  
+            <div class="card">
+                <h4 class="card-header my-bg-primary appuye text-white">catégories</h4>
+                <div class="card-body fondParDefaut">
+                   <ul>
+                      <li *ngFor="let c of categories" [class.selected]="c === selectedCategory"
+                      (click)=onNavigateByCategory(c)>{{c}}</li> 
+                   </ul>
+                </div>
+            </div>
+         </div>
+         <div class="col-sm-8">  
+                <div class="card">
+                    <h4 class="card-header my-bg-primary appuye text-white">produits</h4>
+                    <div class="card-body fondParDefaut">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+             </div>
+        </div>
+</div>

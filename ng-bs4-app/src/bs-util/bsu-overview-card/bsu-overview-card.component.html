@@ -1,0 +1,19 @@
+<div class="card" [style.height]="'100%'">
+		<div class="card-header my-bg-primary">
+			<h4 class="text-white">{{title}}</h4> 
+		</div> 
+		<div class="card-body" >
+			<!-- {{texte}} -->
+			<a *ngIf="bigModalInnerHtmlText" (click)="myModal.openThisContext()">
+			    <div [innerHTML]="smallInnerHtmlText"></div>
+			</a>
+			<!-- else -->
+			<div *ngIf="bigModalInnerHtmlText==null" [innerHTML]="smallInnerHtmlText"></div>
+    </div> 
+		 <div *ngIf="footer" class="card-footer"> 
+		   {{footer}}
+		 </div> 
+	</div> 
+
+	<bsu-modal [title]="title" #myModal
+	           [innerHtmlText]="bigModalInnerHtmlText"></bsu-modal>

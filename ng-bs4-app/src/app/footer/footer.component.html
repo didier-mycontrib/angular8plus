@@ -1,0 +1,3 @@
+<div class="my-footer">footer - <a [routerLink]="['/ngr/welcome']">welcome</a> 
+ - secureMode=<b>{{authService.currentSecureMode}}</b>
+<span [style.display]="authService.lastAuthResponse?'inline':'none'" > - username=<b>{{authService.lastAuthResponse?.username}}</b> , roles=<b>{{authService.lastAuthResponse?.roles}}</b></span> </div>

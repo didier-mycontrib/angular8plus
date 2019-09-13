@@ -1,0 +1,135 @@
+<div class="card">
+    <div class="card-header  my-bg-primary  appuye">
+      <h4 class="text-white">Administration/Publication des news</h4>
+    </div>
+    <div class="card-body fondParDefaut">
+
+   
+    <div class="row">
+     <div class="col-sm-4">  
+        <div class="card">
+            <h4 class="card-header my-bg-primary appuye text-white">news (liste)</h4>
+            <div class="card-body fondParDefaut">
+    
+      <input type="button" value="actualiser la liste" (click)="onRechercherPublications()"/> <br/>
+      <hr/>
+     <!-- <div [style.overflow]="'auto'">--> <!--for horizontal (or v) scrolling -->
+       <select [(ngModel)]="selectedPublication"   size="8"  style="width:100%"
+              (change)="onChangeSelectedPublication($event)">
+          <option *ngFor="let publication of tabPublications"
+                  [ngValue]="publication" >{{essentielPublicationString(publication)}}</option>
+       </select>
+      <!--</div>-->
+      <br/><br/>
+      <input type="button" value="supprimer la publication selectionnée"
+            [disabled]="!confirmDelete || selectedPublication._id==null" 
+            (click)="onSupprimerPublication()"/> <br/>
+      ( après <input type="checkbox" [(ngModel)]="confirmDelete"/> confirmation )
+      <hr/>  
+      <span >{{msg}}</span> <br/>
+      <hr/>
+    
+      <input type="button" value="nouvelle publication"
+             (click)="onNouvellePublication()"/>
+      </div><!-- end of sub card-body --> 
+      </div> <!-- end of sub card -->
+     </div>
+     <div class="col-sm-8">
+        <div class="card">
+            <h4 class="card-header my-bg-primary appuye text-white">{{filtrePost}} (sélection)</h4>
+          <div class="card-body fondParDefaut">    
+  <!-- debut contenu ancien onglet 1 --> &nbsp;
+     <form role="form" #formPublication="ngForm" (mouseenter)="onFormInit()"
+     method="POST" encType="multipart/form-data"  id="formUpload" class="form-horizontal">
+       
+     <!--
+         <bsu-my-fg-label [label]="'Categorie'">
+             <select class="form-control" name="categorie"
+                      [(ngModel)]="selectedPublication.categorie" >
+               <option value="news" selected>news / actualité</option>
+               <option value="atelier_ecriture" >atelier_ecriture</option>
+             </select>
+         </bsu-my-fg-label>
+        -->   
+        
+        <bsu-my-fg-label [label]="'_id'">
+                <i>{{selectedPublication._id}}</i> (<b>{{mode}}</b>)
+        </bsu-my-fg-label>   
+
+
+        <bsu-my-fg-label [label]="'Date'">
+           <div class="input-group">
+            <input  class="form-control" placeholder="yyyy-mm-dd"
+                   name="date" [(ngModel)]="datePublication" bsDatepicker
+                   [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" />
+           </div>
+        </bsu-my-fg-label>
+
+         <bsu-my-fg-label [label]="'Titre'">
+             <input type="text" class="form-control" required
+                    name="titre" [(ngModel)]="selectedPublication.titre" />
+         </bsu-my-fg-label>
+         
+         <bsu-my-fg-label [label]="'image (facultative)'">
+             <input type="file" class="form-control" 
+                     id="f_imageFile" #f_imageFile
+                    (change)="handleImageFileInput($event.target.files)"/>
+             {{selectedPublication.fichier_image_name}}
+         </bsu-my-fg-label>
+         
+         <bsu-my-fg-label [label]="'Texte/Résumé (html)'">
+             <textarea rows="3" class="form-control" name="resume" required
+                       [(ngModel)]="selectedPublication.resume" 
+                       (dblclick)="modalResume.openThisContext()" ></textarea>
+         </bsu-my-fg-label>
+         <bsu-modal [title]="selectedPublication.titre" #modalResume
+                    [innerHtmlText]="selectedPublication.resume"></bsu-modal>
+       
+         <bsu-my-fg-label [label]="'type de détail'">
+             <input type="radio" name="detailType" [(ngModel)]="detailType" [value]="'none'" /> aucun &nbsp;&nbsp;
+             <input type="radio" name="detailType" [(ngModel)]="detailType" [value]="'text'" /> texte développé (html simple)&nbsp;&nbsp;
+             <input type="radio" name="detailType" [(ngModel)]="detailType" [value]="'file'" /> fichier (.html, .pdf)&nbsp;&nbsp;
+             <input type="radio" name="detailType" [(ngModel)]="detailType" [value]="'link'" /> lien externe
+         </bsu-my-fg-label>
+       
+         <bsu-my-fg-label [label]="'Fichier (page) de détails'"
+                          [style.display]="detailType=='file'?'block':'none'">
+             <input type="file" class="form-control" 
+                    (change)="handleDetailFileInput($event.target.files)"
+                     id="f_detailsFile" #f_detailsFile />
+             {{selectedPublication.fichier_details_name}}
+         </bsu-my-fg-label>
+         
+         <bsu-my-fg-label [label]="'Texte développé (html simple)'"
+                          [style.display]="detailType=='text'?'block':'none'">
+             <textarea rows="10" class="form-control" name="texte_complet"
+                       [(ngModel)]="selectedPublication.texte_complet" 
+                       (dblclick)="modalTexteComplet.openThisContext()"></textarea>
+         </bsu-my-fg-label>
+         <bsu-modal [title]="selectedPublication.titre" #modalTexteComplet
+                    [innerHtmlText]="selectedPublication.texte_complet"></bsu-modal>
+                   
+         <bsu-my-fg-label [label]="'Lien hypertexte externe'"
+                          [style.display]="detailType=='link'?'block':'none'">
+             <input type="email" class="form-control" name="link"
+                    [(ngModel)]="selectedPublication.lien_externe"
+                   placeholder="exemple http://site-externe.com/page-interessante.html" />
+         </bsu-my-fg-label>
+         
+         <div class="form-group row">
+           <div class="col-sm-offset-3 col-sm-9">
+           <input  type="submit" class="btn my-bg-primary text-white" 
+                   [disabled]="!formPublication.form.valid" [value]="selectedPublication._id?'Modifier':'Publier'" 
+                   (click)="onSubmit()" /> &nbsp;&nbsp; <span>{{msgSaveOrUpdate}}</span>
+           </div>
+         </div>
+         
+       </form>
+      </div> <!-- fin of sub card-body -->
+    </div> <!-- fin of sub card -->
+       <!-- fin contenu ancien onglet 1 -->
+
+    </div> <!--end of second column -->
+    </div> <!-- end of row with 2 cols -->
+    </div><!-- end of main card-body -->
+    </div> <!-- end of main card -->

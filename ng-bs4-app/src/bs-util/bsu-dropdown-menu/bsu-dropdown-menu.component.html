@@ -1,0 +1,9 @@
+
+<li dropdown class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle titre1" id="myDropdown" 
+  dropdownToggle >{{label}}</a>
+  <div *dropdownMenu class="dropdown-menu fondParDefaut" aria-labelledby="myDropdown">
+    <bsu-nav-item *ngFor="let mDef of dopdownMenuDefs" 
+            subLevel="true" [menuDef]="mDef"></bsu-nav-item>
+  </div>
+</li>

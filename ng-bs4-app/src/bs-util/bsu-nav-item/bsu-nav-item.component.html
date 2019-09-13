@@ -1,0 +1,16 @@
+    <a *ngIf="menuDef.path && subLevel" 
+       class="nav-link" [routerLink]="[menuDef.path]" >
+      <p class="titre2">{{menuDef.label}}</p>
+    </a>
+<!-- ou bien -->
+<li *ngIf="menuDef.path && !subLevel"  class="nav-item">
+    <a class="nav-link" [routerLink]="[menuDef.path]" >
+      <p class="titre1">{{menuDef.label}}</p>
+    </a>
+</li>
+<!-- ou bien -->
+<div *ngIf="menuDef.divider" class="dropdown-divider"></div>
+<!-- ou bien -->
+<bsu-dropdown-menu *ngIf="menuDef.children" [label]="menuDef.label"
+               [dopdownMenuDefs]="menuDef.children" >
+</bsu-dropdown-menu>

@@ -1,0 +1,13 @@
+<p><b><input type="checkbox" [checked]="secureMode" 
+   (change)="onSettingSecureMode($event)" /> secureMode </b></p>
+<p [style.color]="secureMode==null?'red':'green'">{{msg}}</p>
+<ul>
+    <li>when secureMode=false (dev-only) , all rest-api (in remote backend) are public </li>
+    <li>when secureMode=true (like in prod) , private rest-api (in remote backend) need auth/login </li>
+</ul>
+<!--
+<div [style.display]="secureMode==true?'block':'none'">
+    <hr/>
+    jwtToken in sessionStorage : {{currentTokenInSessionStorage}} (may be invalid / expired)
+</div>
+-->

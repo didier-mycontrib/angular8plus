@@ -1,0 +1,78 @@
+<div class="card">
+    <div class="card-header  my-bg-primary  appuye">
+      <h4 class="text-white">Administration des Devises</h4>
+    </div>
+    <div class="card-body fondParDefaut">
+
+   
+    <div class="row">
+     <div class="col-sm-4">  
+        <div class="card">
+            <h4 class="card-header my-bg-primary appuye text-white">devises (liste)</h4>
+            <div class="card-body fondParDefaut">
+    
+      <input type="button" value="actualiser la liste" (click)="onGetAllDevises()"/> <br/>
+      <hr/>
+     <!-- <div [style.overflow]="'auto'">--> <!--for horizontal (or v) scrolling -->
+       <select [(ngModel)]="selectedDevise"   size="8"  style="width:100%"
+              (change)="onChangeSelectedDevise($event)">
+          <option *ngFor="let Devise of devises"
+                  [ngValue]="Devise" >{{essentielDeviseString(Devise)}}</option>
+       </select>
+      <!--</div>-->
+      <br/><br/>
+      <input type="button" value="supprimer la Devise selectionnée"
+            [disabled]="!confirmDelete || selectedDevise.code==null" 
+            (click)="onSupprimerDevise()"/> <br/>
+      ( après <input type="checkbox" [(ngModel)]="confirmDelete"/> confirmation )
+      <hr/>  
+      <span >{{msg}}</span> <br/>
+      <hr/>
+    
+      <input type="button" value="nouvelle Devise"
+             (click)="onNouvelleDevise()"/>
+      </div><!-- end of sub card-body --> 
+      </div> <!-- end of sub card -->
+     </div>
+     <div class="col-sm-8">
+        <div class="card">
+            <h4 class="card-header my-bg-primary appuye text-white">{{filtrePost}} (sélection)</h4>
+          <div class="card-body fondParDefaut">    
+  <!-- debut contenu ancien onglet 1 --> &nbsp;
+     <form role="form" #formDevise="ngForm" (mouseenter)="onFormInit()"
+     method="POST"  id="formDevise" class="form-horizontal">
+       
+        <bsu-my-fg-label [label]="'code ('+mode+')'">
+            <input type="text" class="form-control" required
+                   [disabled]="mode!='newOne'"
+                   name="code" [(ngModel)]="selectedDevise.code" /> 
+        </bsu-my-fg-label>   
+
+         <bsu-my-fg-label label="name">
+             <input type="text" class="form-control" required
+                    name="name" [(ngModel)]="selectedDevise.name" />
+         </bsu-my-fg-label>
+
+         <bsu-my-fg-label label="change">
+            <input type="text" class="form-control" required
+                   name="change" [(ngModel)]="selectedDevise.change" />
+        </bsu-my-fg-label>
+         
+         <div class="form-group row">
+           <div class="col-sm-offset-3 col-sm-9">
+           <input  type="submit" class="btn my-bg-primary text-white" 
+                   [disabled]="!formDevise.form.valid" [value]="mode!='newOne'?'Modifier':'Ajouter'" 
+                   (click)="onSubmit()" /> &nbsp;&nbsp; <span>{{msgSaveOrUpdate}}</span>
+           </div>
+         </div>
+         
+       </form>
+      </div> <!-- fin of sub card-body -->
+    </div> <!-- fin of sub card -->
+       <!-- fin contenu ancien onglet 1 -->
+
+    </div> <!--end of second column -->
+    </div> <!-- end of row with 2 cols -->
+    </div><!-- end of main card-body -->
+    </div> <!-- end of main card -->
+
