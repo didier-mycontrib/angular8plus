@@ -34,6 +34,9 @@ export class AdminNewsComponent implements OnInit {
 
   }
  
+  public onFormInit(){
+
+  }
 
   private initDatePublicationFromCurrentDate(){
     let d : Date= new Date();

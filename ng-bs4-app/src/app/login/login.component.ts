@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   authResponse : AuthResponse = null;
   errorMsg : string = null;
 
-  constructor(private authService : AuthService) {
+  constructor(public authService : AuthService) {
     this.authRequest.password="pwd";
    }
 

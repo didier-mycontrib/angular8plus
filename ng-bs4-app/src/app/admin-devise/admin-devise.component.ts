@@ -25,7 +25,7 @@ export class AdminDeviseComponent implements OnInit {
 
   }
 
-  constructor(private deviseService : DeviseService) { }
+  constructor(public deviseService : DeviseService) { }
 
   ngOnInit() {
     this.onNouvelleDevise();
@@ -36,7 +36,7 @@ export class AdminDeviseComponent implements OnInit {
     return  "[" + dev.code + "] " + dev.name + " : " +dev.change ; 
   }
 
-  public onGetAllDevises(evt:any){
+  public onGetAllDevises(){
     this.deviseService.getDevises()
     .subscribe((devises:Devise[])=> { this.devises = devises;
                                       console.log("devises="+JSON.stringify(this.devises)); });
@@ -77,12 +77,12 @@ export class AdminDeviseComponent implements OnInit {
  }
 
   endOfDelete(){
-    this.onGetAllDevises(null);
+    this.onGetAllDevises();
     this.onNouvelleDevise();
     this.msg="suppression bien effectuée";
   }
 
-  public onSupprimerDevise(evt:any){
+  public onSupprimerDevise(){
     this.deviseService.deleteDeviseServerSide(this.selectedDevise.code)
     .subscribe(()=>{this.endOfDelete() },
               (err)=>{this.msg="echec suppression";}
