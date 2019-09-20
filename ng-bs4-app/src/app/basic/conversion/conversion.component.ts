@@ -11,7 +11,7 @@ export class ConversionComponent implements OnInit {
 
   public devises=null;
 
-  public source : string = "EUR";
+  public source : string = "USD";
   public cible : string = "USD";
   public montantSource : number = 100;
   public montantCible : number;
@@ -26,6 +26,7 @@ export class ConversionComponent implements OnInit {
   }
 
   public onConvertir(evt:any){
+    console.log(`source=${this.source} cible=${this.cible} montant=${this.montantSource}`)
     this.deviseService.convertir(this.montantSource,this.source,this.cible)
         .subscribe((resConv:ResConv)=> { this.montantCible = resConv.result;
                                           console.log("resConv="+JSON.stringify(resConv)); });

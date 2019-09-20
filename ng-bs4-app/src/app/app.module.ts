@@ -32,6 +32,15 @@ import { MyAuthInterceptor } from './common/interceptor/my-auth-interceptor';
 import { AdminSecurityComponent } from './admin-security/admin-security.component';
 import { AdminDeviseComponent } from './admin-devise/admin-devise.component';
 import { ConversionComponent } from './basic/conversion/conversion.component';
+import { JwtModule } from "@auth0/angular-jwt";
+
+//this sub function will be used by automatic internal 
+//interceptor of JwtModule (@auth0/angular-jwt)
+export function myTokenGetter() {
+  return /*localStorage.*/sessionStorage.getItem("authToken");
+}
+//NB: no need of MyAuthInterceptor if JwtModule has already
+//his internal interceptor
 
 @NgModule({
   declarations: [
@@ -62,12 +71,15 @@ import { ConversionComponent } from './basic/conversion/conversion.component';
     BrowserAnimationsModule,
     TabsModule.forRoot(),BsDatepickerModule.forRoot(),
     CarouselModule.forRoot(),
-    BsUtilModule
+    BsUtilModule,
+    JwtModule.forRoot({
+      config: { tokenGetter: myTokenGetter}
+    })
   ],
   providers: [
-      { provide: HTTP_INTERCEPTORS,
+     /* { provide: HTTP_INTERCEPTORS,
         useClass: MyAuthInterceptor,
-        multi: true    }
+        multi: true    } */
   ],
   bootstrap: [AppComponent]
 })

@@ -16,5 +16,5 @@
 <input type='button' value='convertir' (click)="onConvertir($event)" /> <br/> 
 </form>
 <hr/>
-montant converti : <b>{{montantCible}}</b>
+montant converti : <b>{{montantCible | number:'1.0-2'}}</b>
 </div>
