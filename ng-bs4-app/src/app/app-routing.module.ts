@@ -12,6 +12,8 @@ import { ProductDetailsComponent } from './browse-products/product-details/produ
 import { CanActivatePublisherRouteGuard, CanActivateAdminRouteGuard } from './common/gard/can-activate-route-guard';
 import { AdminSecurityComponent } from './admin-security/admin-security.component';
 import { AdminDeviseComponent } from './admin-devise/admin-devise.component';
+import { WithAnimationsComponent } from './advanced/with-animations/with-animations.component';
+import { ChatComponent } from './advanced/chat/chat.component';
 
 
 const routes: Routes = [
@@ -26,6 +28,8 @@ children: [
   { path: 'prod-details/:id', component: ProductDetailsComponent },
   { path: '', redirectTo: 'prodList/divers', pathMatch: 'prefix'}
   ] } ,
+{ path: 'ngr/with-animations', component: WithAnimationsComponent } ,
+{ path: 'ngr/chat', component: ChatComponent } ,
 { path: 'ngr/security', component: AdminSecurityComponent } ,
 { path: 'ngr/login', component: LoginComponent } ,
 { path: 'ngr/admin-news', component: AdminNewsComponent , canActivate: [CanActivatePublisherRouteGuard] } ,

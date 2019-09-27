@@ -1,0 +1,13 @@
+<p>chat whith socket.io</p>
+<div [style.display]="pseudoSent?'none':'block'">
+    pseudo:<input [(ngModel)]="pseudo" /> &nbsp;
+    <button (click)="onSetPseudo()">set & send</button> 
+</div>
+<div [style.display]="pseudoSent?'block':'none'">
+    pseudo : <b>{{pseudo}}</b> <br/>
+    message:<input [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && onSendMessage()"/>(press Enter) 
+    <hr/>
+    <div *ngFor="let evtMsgWithPseudo of messages">
+        <p><span class="pseudo_chat">{{evtMsgWithPseudo.pseudo}}</span>  {{evtMsgWithPseudo.message}}</p>
+    </div>
+</div>

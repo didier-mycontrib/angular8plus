@@ -26,8 +26,14 @@ export class HeaderComponent implements OnInit {
         { label : "devise (admin)" , path : "ngr/admin-devise" },
         { label : "stats (admin)" , path : "ngr/stats" }
       ]
-    } 
-    ];
+    } ,
+    { label : "advanced" , 
+      children : [
+        { label : "animations" , path : "ngr/with-animations" },
+        { divider : true },
+        { label : "chat" , path : "ngr/chat" }
+      ]
+    }];
 
   constructor() { }
 
