@@ -35,6 +35,7 @@ import { ConversionComponent } from './basic/conversion/conversion.component';
 import { JwtModule } from "@auth0/angular-jwt";
 import { WithAnimationsComponent } from './advanced/with-animations/with-animations.component';
 import { ChatComponent } from './advanced/chat/chat.component';
+import { AdminProdIdbComponent } from './advanced/admin-prod-idb/admin-prod-idb.component';
 
 //this sub function will be used by automatic internal 
 //interceptor of JwtModule (@auth0/angular-jwt)
@@ -64,7 +65,8 @@ export function myTokenGetter() {
     ProductDetailsComponent,
     AdminSecurityComponent,
     WithAnimationsComponent,
-    ChatComponent
+    ChatComponent,
+    AdminProdIdbComponent
   ],
   imports: [
     BrowserModule,

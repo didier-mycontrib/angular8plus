@@ -1,0 +1,35 @@
+enonces de Tps possibles
+========================
+
+0a. installation de nodeJs et npm
+si node -v et npm -v se sont pas des commandes reconnues (dans CMD)
+alors télécharger et installer nodeJs (pour windows 64 bits).
+relancer ensuite une nouvelle fenêtre CMD et npm -v .
+
+0b. installation de typescript
+si tsc -v est une commande inconnue (dans CMD),
+alors lancer 
+npm install -g typescript
+
+0c. installation de angular-cli
+si ng -help est une commande non reconnue (dans CMD) alors lancer
+npm install -g @angular/cli
+
+0d. installer si nécessaire l'IDE "Visual Studio code" .
+
+1. création d'un nouveau projet "application angular"
+Dans c:\temp (ou c:\tp) ou ailleurs:
+lancer la commande ng new my-app
+choisir y à la question "activer le routing angular"
+choisir scss comme format de feuilles de styles
+se placer dans le répertoire my-app (cd my-app)
+lancer la commande
+ng serve -o
+et verifier le fonctionnement initial via http://localhost:4200
+Via l'éditeur "Visual Studio code" , ouvrir le "folder" c:\temp\my-app
+et modifier le fichier src/app/app.component.html en supprimant tout
+l'ancien contenu et en y placant à la place
+<p> welcome to {{title}} </p>
+<!-- <router-outlet></router-outlet> --> 
+Vérifier les changements (http://localhost:4200)
+

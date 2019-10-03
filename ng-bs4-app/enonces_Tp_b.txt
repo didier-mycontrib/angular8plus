@@ -1,0 +1,44 @@
+enonces de Tps possibles
+========================
+
+2a. premiers pas avec typescript
+dans c:\temp (ou ailleurs) créer un nouveau répertoire "tp-ts"
+via nodepad++ ou bien visual-studio-code écrire un petit fichier f1.ts
+en y déclarant une variable x de type :number , affectant 18 à x 
+et affichant x via console.log() .
+compiler/transipler f1.ts en f1.js via tsc
+exécuter node f1.js
+
+2b. typescript en mode "projet":
+créer ensuite les sous répertoires "tp-ts/src" et "tp-ts/dist"
+déplacer f1.ts dans "tp-ts/scr" et supprimer f1.js
+dans un terminal "CMD" , se placer dans c:\temp\tp-ts et lancer la commande
+tsc --init
+modifier ensuite le fichier tsconfig.json en 
+décommentant "outDir" : et modifiant la valeur: "outDir": "dist" .
+sauvegarder ensuite le fichier tsconfig
+Ouvrir ensuite l'ensemble du "folder" tp-ts via l'éditeur "visual-studio-code"
+dans tp-ts/src , créer un nouveau fichier f2.ts
+y déclarer un tableau de string (avec quelques valeurs)
+via for(...of...) boucler sur les valeurs du tableau de façon à 
+appliquer .toUppercase() et effectuer un affichage via console.log()
+Ouvrir un nouveau terminal (dans visual-studio-code) et y lancer la commande
+"tsc" ou bien "tsc -w" .
+Les 2 fichiers f1.js et f2.js doivent normalement être générés dans tp-ts/dist.
+Dans encore un autre nouveau terminal, lancer node dist/f2.js
+pour exécuter le code
+
+2c. typescript en mode "orienté objet"
+dans tp-ts/src (à coté de f1.ts et f2.ts) créer un nouveau fichier personne.ts
+comportant une classe Personne ayant les attributs nom , prenom et age .
+coder et tester plein de versions successives (sans puis avec constructeur, ...)
+
+2d. tester héritage typescipt via classe "Empoye" (dans personne.ts)
+héritant de "Personne" avec un numero et un salaire en plus.
+
+2e. ajouter les nouveaux fichiers test_pers_emp.ts et employe.ts
+puis réorganiser le code via des import/export et des couper/coller.
+tester l'exécution via node dist/test_pers_emp.js
+
+2f. autres tps libres sur typescript 
+....

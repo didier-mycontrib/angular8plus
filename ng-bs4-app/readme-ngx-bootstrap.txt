@@ -9,3 +9,4 @@ npm install --save @auth0/angular-jwt (v3) pour connaitre payload (expiration, .
 
 
 npm install socket.io-client --save (pour chat avec socket.io)
+npm install idb --save (pour idb : indexedDB with Promises)

@@ -11,8 +11,8 @@ export class ConversionComponent implements OnInit {
 
   public devises=null;
 
-  public source : string = "USD";
-  public cible : string = "USD";
+  public source : string ;
+  public cible : string ;
   public montantSource : number = 100;
   public montantCible : number;
 
@@ -20,10 +20,17 @@ export class ConversionComponent implements OnInit {
 
   ngOnInit() {
     this.deviseService.getDevises().subscribe(
-      (devises)=>{this.devises = devises;  },
+      (devises)=>{this.devises = devises; this.initDefault();  },
       (err)=>{console.log(err);}
     );
   }
+
+  private initDefault(){
+    if(this.devises && this.devises[0] ){
+      this.source=this.devises[0].code;
+      this.cible=this.devises[0].code;
+    }
+}
 
   public onConvertir(evt:any){
     console.log(`source=${this.source} cible=${this.cible} montant=${this.montantSource}`)

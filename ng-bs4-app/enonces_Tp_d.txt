@@ -1,0 +1,149 @@
+enonces de Tps possibles (partie "d")
+=====================================
+
+4a. Service commun pour partager données "utilisateur"
+créer le sous "folder" src/app/common/service pour bien ranger les services
+se placer dans src/app/common/service (cd) et générer un nouveau service
+via ng g service preferences .
+Au sein de PreferencesService, ajouter (en public) la propriété couleurFondPreferee
+(de type string) avec une valeur par défaut.
+Injecter le service "PreferencesServices" (en public) dans les constructeurs
+de HeaderComponent et FooterComponent.
+Faire en suite en sorte que l'on puisse changer la valeur de
+preferencesService.couleurFondPreferee (via liste déroulante ou autre)
+au sein de FooterComponent et que cette nouvelle valeur choisie
+soit utilisée en tant que couleur de fond de HeaderComponent .
+NB: ce tp pourra être ultérieurement amélioré via BehaviorSubject .
+
+4abis (TP FACULATIF)
+Via un éventuel service "TraductionService" basé sur le même principe que le
+Tp précédent (4a), mettre en oeuvre un service de traduction "maison", retournant 
+les libellés en fonction de clefs et d'un choix le langue utilisateur (ex: "fr" , "us", 
+"de", "es" ,"it" ). Le choix de la langue pourra éventuellement être effectué via
+une liste déroulante (dans header ou footer).
+Tous les composants intéressés auront simplement besoin d'injecter le service de traduction
+afin de récupérer les traductions à afficher via {{...}}
+
+
+4b. Récupération de la partie "backend-tp-api" (pour Tp "appels Ws REST")
+télécharger le zip de https://github.com/didier-mycontrib/tp_node_js
+et l'extraire dans un répertoire temporaire.
+Se placer dans le sous répertoire "backend-tp-api" et lancer la commande
+npm install pour télécharger les dépendances techniques dans node_modules
+lancer ensuite lancer_tsc.bat pour compiler ".ts" en ".js"
+lancer ensuite lancer_nodeJs_noDB.bat pour démarrer l'appli "backend-tp-api"
+en mode "sans base de données à préablement installer".
+Visualiser certains Web Services REST en mode get via l'URL
+http://localhost:8282/test-ws.
+NB: via l'url http://localhost:8282 on pourra accéder à un exemple d'application
+angular dont le code (généré par ng build --prod) a été fusionné avec la partie
+backend nodeJs/express de façon à tout télécharger depuis le même endroit (ici locahost:8282).
+
+
+4c. Service "DeviseService" pour récupérer des données
+- générer une nouvelle classe de données "Devise" dans src/app/common/data
+  structurer cette classe avec .code (string) , .name (string) , .change (number)
+- générer un nouveau service "DeviseService" dans src/app/common/service
+  via ng g service devise
+- générer (dans src/app) , un nouveau composant "ConversionComponent"
+  injecter le service "DeviseService" dans "ConversionComponent"
+- coder plusieurs versions successives de "DeviseService" et "ConversionComponent"
+  pour que l'on puisse effectuer des conversions de monnaies
+  en appelant certains web-services "REST" :
+    - pré-version a : simulation sans asynchronisme (tableau de devises)
+    - version b : simulation en asynchrone (via Observable<...>/of())
+    - version c : réel appel de WS-REST avec HttpClient
+                  et avec ng serve --proxy-config proxy.conf.json
+                  (url : http://localhost:8282/devise-api/public/devise  et
+                    http://localhost:8282/devise-api/public/convert?source=EUR&target=USD&amount=200 )
+
+4d. Service "LoginService" pour appel HTTP en mode post et récupération token
+- générer un nouveau service "LoginService" dans src/app/common/service
+  via ng g service login
+- injecter ce service dans LoginComponent (du tp "validation formulaire")
+- utiliser "PostMan" pour comprendre le fonctionnement du Web-service
+  dont l'URL est http://localhost:8282/login-api/public/auth qu il est prévu d'invoquer
+  en mode "POST" avec "Content-Type" : "application/json" et avec les données "raw"
+  suivantes: { "username" : "admin1" , "password" : "pwdadmin1" , "roles" : "admin" }
+- coder ensuite (dans src/app/common/data) , une classe "LoginResponse" correspondant
+  à la structure de la réponse renvoyée.
+- coder ensuite la méthode suivante dans LoginService en s'appuyant sur http.post() :
+  public postLogin(login: Login): Observable<LoginResponse> .
+- appeler ensuite cette méthode au sein de doLogin() de LoginComponent
+  avec un .subscribe() et des callbacks sous forme de lambdas/arrow-functions .
+- bien gérer les différents cas (message positif , message d'erreur, ...)
+- via un ajout de .pipe(
+                          tap( (loginResponse) => { traitement_supplémentaire; })
+                       )
+  au sein de LoginService.postLogin() , faire en sorte que le token soit stocké en 
+  sessionStorage ou localStorage en cas de réponse positive.
+  Ainsi mémorisé, ce token pourra ensuite être systématiquement retransmis au sein des futures
+  requêtes http via un intercepteur angular de façon à pouvoir appeler des WS privés/sensibles.
+
+4e. (TP FACULATIF d'assez haut niveau):
+    composant "AdminDeviseComponent" avec "CRUD" (partiel ou complet selon temps de TP)
+    et appels de WS-REST securisés.
+  URL des WS préparés:
+    http://localhost:8282/devise-api/public/devise (GET)
+    localhost:8282/devise-api/private/role_admin/devise (appelable en mode POST et PUT
+      avec des données JSON de type  { "code": "M1" , "name" : "monnaie1" , "change" : 1.123 } )
+    localhost:8282/devise-api/private/role_admin/devise/JPYouAutre (DELETE)   
+  NB: l'application backend-tp-api peut avoir sa sécurité globalement activée
+      ou désactivée via l'url suivante : 
+      http://localhost:8282/auth-api/public/dev-only/set-secure-mode/true 
+      C'est évidemment "pour TP seulement" , "pas à reproduire en production" !!!!
+  Mode opératoire :
+    - bien comprendre le comportement des WS-REST via "postman"
+    - ajouter des méthodes sur DeviseService pour l'ajout , la mise à jour et la suppression
+      d'une devise (http en modes "POST" , "PUT" , "DELETE" ). Ces méthodes doivent
+      retourner des éléments "Observable<...>"
+    - injecter "DeviseService" dans "AdminDeviseComponent" 
+    - ajouter "AdminDeviseComponent" dans les routes de app-routing.module.ts 
+      et le menu de header.component .
+    - code (plus ou moins partiellement) un "CRUD" dans "AdminDeviseComponent"
+      et tester le tout (NB: on pourra dans un premier temps coder un "delete" qui
+      se programme rapidement) .
+    - tester avec ou sans sécurité activée, avec ou sans jeton, avec ou sans intercepteur .
+
+4f. Tp simple sur "pipe" 
+- peaufiner tva.compoment.html en ajoutant un pipe pour arrondir les résultats
+  (tva,ttc) des calculs à 2 chiffres après la virgule.
+- utliser éventuellement le pipe {{ title | uppercase }} dans un autre composant 
+  (ex: app.component.ts ou header.component.ts ou ...)
+
+4g. Tp navigation par code
+- dans login.component.html , ajouter un nouveau bouton de libellé "vers admin devise"
+  qui sera grisé/disabled tant que login pas effectué
+- le code caché derrière ce bouton effectuera une navigation vers un des composants
+  configuré dans les routes (ex: "adminDevise" ou un autre à défaut) .
+
+4h. Tp routing évolué (après avoir abordé le milieu du chapitre "routing")
+- récupérer (par copier/coller) le code du service "ProductService"
+  src/app/common/service/product.service.ts à recopier du projet exemple ng-bs4-app
+  vers votre projet "my-app" .
+- générer un nouveau composant de premier niveau "browse-products"
+- injecter "ProductService" dans "BrowseProductsComponent",
+- ajouter "browse-products" dans routes et menu de header
+- faire en sorte de "BrowseProductsComponent" puisse afficher les catégories
+  dans un liste <ul> <li *ngFor="...">...</li> </ul> et que l'on puisse
+  sélectionner une des catégories (celle ci sera mise en évidence par styles css).
+- tester cette première partie
+- en étant placé dans src/app/browse-products , générer via ng g component ...
+  un sous-sous-composant "productList"
+- ajouter <router-outlet></router-outlet> dans browse-products.component.html
+- configurer des sous-routes via un ajout d'un bloc "children" dans
+  src/app/app-routing.module.ts
+  Une de ces sous-route sera de type prodList/:category (avec paramètre)
+- faire en sorte que selon la catégorie sélectionnée , une navigation
+  déclenchée au sein de browse-products.component.ts via router.navigate()
+  vers [ 'browse-products/prodList' , categorieSelectionne ]
+  puis indirectement activer une callback enregistrée via 
+  this.activatedRoute.params.subscribe(...) dans le constructeur du sous sous
+  composant "ProdListComponent" .
+  Cette callback servira à actualiser une variable locale categorie
+  puis effectuer une requête ajax/http
+  de manière à ce que prodlist.component.html puisse afficher la liste
+  des produits de la catégorie sélectionnée.
+
+4i,j,k,l,...,z
+  Tp libres (selon inspiration du moment) .

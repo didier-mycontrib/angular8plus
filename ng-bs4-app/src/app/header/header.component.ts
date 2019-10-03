@@ -31,6 +31,8 @@ export class HeaderComponent implements OnInit {
       children : [
         { label : "animations" , path : "ngr/with-animations" },
         { divider : true },
+        { label : "admin-prod (indexedDB)" , path : "ngr/admin-prod-idb" },
+        { divider : true },
         { label : "chat" , path : "ngr/chat" }
       ]
     }];

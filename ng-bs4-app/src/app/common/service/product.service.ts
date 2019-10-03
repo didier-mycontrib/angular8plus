@@ -1,12 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of , from} from 'rxjs';
 import { filter , flatMap, toArray } from 'rxjs/operators'
 import { Product } from '../data/product';
+import { OnlineOfflineService } from './online-offline.service';
+import { openDB , IDBPDatabase} from 'idb';; //idb (npm install -s idb) is a js library
+                            //for using indexedDB with Promises
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+
+  constructor(private onlineOfflineService : OnlineOfflineService) { 
+    this.initMyIdbSampleContent(); 
+  }
+
+  public getProducts() : Observable<Product[]> {
+    return from(this.getAllProductsPromise());//from() to convert Promise to Observable
+  }
+
+  public postProduct(p: Product) :  Observable<Product> {
+    return from(this.addProductInMyIDbPromise(p));
+  }
+
+  public putProduct(p: Product) :  Observable<Product> {
+    return from(this.updateProductInMyIDbPromise(p));
+  }
+
+  public deleteProductInDb(id: string) :Observable<any>{
+    return from(this.deleteProductInMyIDbPromise(id));
+  }
 
   private memProductlist : Product[] = 
   [
@@ -24,8 +47,23 @@ export class ProductService {
    { _id : "p10" , category : "livres" , price : 12.1 , label : "A la recherche du temps perdu" , description : "Marcel Proust" },
   ];
 
-  getProductsByCategoryObservable(category:string):Observable<Product[]>{
-    return of(this.memProductlist)
+  private async initMyIdbSampleContent(){
+    let db = await this.openMyIDB();
+    let tx = db.transaction('products', 'readwrite');
+    let store = tx.objectStore('products');
+    for(let p of this.memProductlist){
+          let exitingProdWithSameKey = await store.get(p._id);
+          if(exitingProdWithSameKey==null){
+              await store.add(p);//reject Promise and tx if p already in store
+          }
+    }
+    await tx.done;
+    db.close();
+  }
+
+  public getProductsByCategoryObservable(category:string):Observable<Product[]>{
+    /* return of(this.memProductlist)*/
+    return this.getProducts()
           .pipe(
              flatMap(pInTab=>pInTab) ,
              filter( (p) => p.category === category ) ,
@@ -33,5 +71,53 @@ export class ProductService {
           )
   }
 
-  constructor() { }
+  private getAllProductsPromise() : Promise<Product[]>{
+    let dbPromise = this.openMyIDB();
+    return dbPromise.then(function(db) {
+      var tx = db.transaction('products', 'readonly');
+      var store = tx.objectStore('products');
+      return store.getAll();
+    });
+  }
+
+  private addProductInMyIDbPromise(p:Product):Promise<Product>{
+    let dbPromise = this.openMyIDB();
+    return dbPromise.then(function(db) {
+      let tx = db.transaction('products', 'readwrite');
+      let store = tx.objectStore('products');
+      store.add(p);
+      return tx.done;
+    });
+  }
+
+  private updateProductInMyIDbPromise(p:Product):Promise<Product>{
+    let dbPromise = this.openMyIDB();
+    return dbPromise.then(function(db) {
+      let tx = db.transaction('products', 'readwrite');
+      let store = tx.objectStore('products');
+      store.put(p);
+      return tx.done;
+    });
+  }
+
+  private deleteProductInMyIDbPromise(id:string):Promise<any>{
+    let dbPromise = this.openMyIDB();
+    return dbPromise.then(function(db) {
+      let tx = db.transaction('products', 'readwrite');
+      let store = tx.objectStore('products');
+      store.delete(id);
+      return tx.done;
+    });
+  }
+
+  private openMyIDB() : Promise<IDBPDatabase>{
+  var dbPromise = openDB('my-idb', 1, {
+    upgrade(upgradeDb, oldVersion, newVersion, transaction) {
+      if (!upgradeDb.objectStoreNames.contains('products')) {
+        upgradeDb.createObjectStore('products', {keyPath: '_id', autoIncrement: false});
+      }
+    },
+  });
+  return dbPromise;
+  }
 }

@@ -1,0 +1,14 @@
+IndexedDB (de base) fourni sans "Promise" par un navigateur:
+- https://developer.mozilla.org/fr/docs/Web/API/API_IndexedDB/Using_IndexedDB
+- https://javascript.info/indexeddb
+
+IndexedDB (avec api supplémentaire "idb" retournant "Promise") et concepts
+bien expliqués:
+- https://developers.google.com/web/ilt/pwa/working-with-indexeddb
+
+IndexedDB avec Promises et async/await:
+- https://medium.com/@filipvitas/indexeddb-with-promises-and-async-await-3d047dddd313
+
+Bibliothèque "idb" (pour code avec "Promise"):
+- https://www.npmjs.com/package/idb
+- https://github.com/jakearchibald/idb

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../common/service/auth.service';
+import { OnlineOfflineService } from '../common/service/online-offline.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,9 +9,14 @@ import { AuthService } from '../common/service/auth.service';
 })
 export class FooterComponent implements OnInit {
 
-  constructor(public authService: AuthService) {}
+  private onLine:boolean;
+
+  constructor(public authService: AuthService,
+              private onlineOfflineService: OnlineOfflineService) {}
 
   ngOnInit() {
+    this.onlineOfflineService.connectionChanged
+        .subscribe( (onLine)=>{this.onLine = onLine;})
   }
 
 }
