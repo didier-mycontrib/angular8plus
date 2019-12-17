@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   title : string ="myApp" //as default value
 
   myMenuDefs :MenuDefinition[] = [
-    { label : "basic" , path : "ngr/basic" },
+    { label : "basic" , path : 'bgr/basic' },
     { label : "news" , path : "ngr/news" },
     { label : "browse-products" , path : "ngr/browse-products" },
     { label : "admin" , 

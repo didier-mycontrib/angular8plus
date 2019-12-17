@@ -1,0 +1,73 @@
+enonces de Tps possibles (partie "e")
+=====================================
+
+5a. Début de mise en production 
+ - lancer une première fois ng build (sans l'option --prod)
+  et visualiser le contenu généré dans le répertoire dist (tailles des fichiers)
+ - lancer une seconde fois ng build avec l'option --prod
+ - corriger les éventuelles erreurs d'incohérence jusque là passées inaperçues.
+ - visualiser le nouveau contenu généré dans le répertoire dist (tailles des fichiers)
+ - recopier le contenu de my-app/dist dans un répertoire temporaire
+   (ex: c:\temp_qui_va_bien) 
+ - installer le mini serveur http "lite-server" via npm install -g 
+ - au sein de  c:\temp_qui_va_bien\my-app ,lancer (via cmd) la commande
+   lite-server
+ - visualiser le résultat sur http://localhost:3000
+ - noter que toute la partie "appel de WS REST" ne fonctionne pas bien
+   il faudrait mettre en oeuvre une config de type "reverse-proxy" sur le serveur
+   http ou bien mélanger le contenu de my-app/dist/my-app avec un backend
+   (java ou nodeJs ou autre)  .
+
+5b Le mode "offLine et  les "BehaviorSubject" Observables
+ - récupérer le service "OnlineOfflineService" par copier/coller de fichier ".ts"
+   à partir d'une version récente de l'application exemple ng-bs4-app
+ - injecter ce service dans deux composants (ex: header et footer)
+ - dans ces 2 composants , enregistrer une callback de genre (dans ngOnInit()):
+     this.onlineOfflineService.connectionChanged
+        .subscribe( (onLine)=>{this.onLine = onLine;}) 
+ - afficher un équivalent de {{onLine}} d'une façon ou d'une autre du coté .html
+ - tester en (coupant et restaurant le réseau) 
+          ou via la case à cocher "offLine" de la partie "application/service worker"
+             de la console web du navigateur "Google Chrome" .
+
+5c IndexedDB via idb et les "Promise" et async/await
+ - installer "idb" dans l'application angular via npm install -s idb
+ - récupérer le service "ProductService" par copier/coller de fichier ".ts"
+   à partir d'une version récente de l'application exemple ng-bs4-app
+ - récupérer le composant AdminProdIdbComponent par copier/coller du répertoire
+   "admin-prod-idb" de ng-bs4-app/src/app/advanced
+   vers my-app/src/app
+ - ajuster si besoin certain "import" et intégrer ce nouveau composant
+   dans notre application my-app (app.module.ts , app-routing.module.ts , 
+    menu de header, ...)
+ - tester le bon fonctionnement "CRUD" en mode local / indexedDB
+ - Analyser (avec le formateur) le code interne de "ProductService":
+   les imports de idb , les "Promise" , les "async/await" , les from()
+   entre "Promise" et "Observable" , le comportement CRUD de idb/indexedDB.
+ - Nouvelle fonctionnalité à coder:
+     - sur une détection d'un basculement en mode "onLine" (par exemple après un offLine forcé)
+       recupérer tout le contenu du store "products" de la base "my-idb"
+       de indexedDB et afficher ceci au format JSON dans console.log
+       sachant qu'avec beaucoup plus de temps on pourrai envoyer
+       toutes ces données à une api REST coté serveur pour synchroniser
+       ou transférer la base locale indexedDB/my-idb avec une base distante
+       partagée . 
+
+5d. socket.io et composant de "chat/discussion" intégré dans angular
+  - lancer l'application "tp_node_js/chat-socket-io" (via le .bat) 
+    en ayant préalablement lancé "npm install" si besoin
+  - utiliser l'application (http://localhost:8383/) en même temps dans
+    plusieurs navigateurs différents (et en saisissant des pseudos différents)
+  - analyser le code coté serveur de tp_node_js/chat-socket-io/src/app.ts
+  - analyser le code coté client/html de tp_node_js/chat-socket-io.
+    Objectif : programmer un équivalent dans l'application "angular".
+  - npm install socket.io-client --save
+  - code à récupérer (par copier/coller) , intégrer et analyser
+    de l'application ng-bs4-app vers my-app:
+        src/advanced/chat (ChatComponent)
+        et 
+        src/common/service/chat.service.ts
+  - tester après intégration dans app-routing, menu, ...
+
+5e,...,z
+  Tp libres (selon inspiration du moment) .

@@ -11,6 +11,8 @@ import { openDB , IDBPDatabase} from 'idb';; //idb (npm install -s idb) is a js 
 })
 export class ProductService {
 
+  private currentIdb : IDBPDatabase = null;
+
   constructor(private onlineOfflineService : OnlineOfflineService) { 
     this.initMyIdbSampleContent(); 
   }
@@ -48,7 +50,7 @@ export class ProductService {
   ];
 
   private async initMyIdbSampleContent(){
-    let db = await this.openMyIDB();
+    let db = await this.openMyIDB();//not accessMyIDB() since .close() at the end of this aync function
     let tx = db.transaction('products', 'readwrite');
     let store = tx.objectStore('products');
     for(let p of this.memProductlist){
@@ -72,7 +74,7 @@ export class ProductService {
   }
 
   private getAllProductsPromise() : Promise<Product[]>{
-    let dbPromise = this.openMyIDB();
+    let dbPromise = this.accessMyIDB();
     return dbPromise.then(function(db) {
       var tx = db.transaction('products', 'readonly');
       var store = tx.objectStore('products');
@@ -81,7 +83,7 @@ export class ProductService {
   }
 
   private addProductInMyIDbPromise(p:Product):Promise<Product>{
-    let dbPromise = this.openMyIDB();
+    let dbPromise = this.accessMyIDB();
     return dbPromise.then(function(db) {
       let tx = db.transaction('products', 'readwrite');
       let store = tx.objectStore('products');
@@ -91,7 +93,7 @@ export class ProductService {
   }
 
   private updateProductInMyIDbPromise(p:Product):Promise<Product>{
-    let dbPromise = this.openMyIDB();
+    let dbPromise = this.accessMyIDB();
     return dbPromise.then(function(db) {
       let tx = db.transaction('products', 'readwrite');
       let store = tx.objectStore('products');
@@ -101,7 +103,7 @@ export class ProductService {
   }
 
   private deleteProductInMyIDbPromise(id:string):Promise<any>{
-    let dbPromise = this.openMyIDB();
+    let dbPromise = this.accessMyIDB();
     return dbPromise.then(function(db) {
       let tx = db.transaction('products', 'readwrite');
       let store = tx.objectStore('products');
@@ -120,4 +122,27 @@ export class ProductService {
   });
   return dbPromise;
   }
+
+  //accessMyIDB() return either already open idb or newly open idb if necessary:
+  // do not call .close() after calling accessMyIDB() !!!
+  private accessMyIDB() : Promise<IDBPDatabase>{
+    return new Promise ((resolve,reject)=> {
+      if(this.currentIdb !=null){
+        resolve(this.currentIdb);
+      }
+      else{
+        this.openMyIDB().then(
+          (db)=>{
+            if(db!=null){
+              this.currentIdb = db; resolve(db);
+            }else{
+              reject("db is null after trying openMyIdb() in accessMyIdb()")
+            }
+          } ,
+          (err)=>{ console.log(err); reject(err);}
+      );
+      }
+    });
+}
+
 }

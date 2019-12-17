@@ -36,6 +36,7 @@ children: [
 { path: 'ngr/login', component: LoginComponent } ,
 { path: 'ngr/admin-news', component: AdminNewsComponent , canActivate: [CanActivatePublisherRouteGuard] } ,
 { path: 'ngr/admin-devise' , component: AdminDeviseComponent, canActivate: [CanActivateAdminRouteGuard]  },
+{ path: '**' ,redirectTo: 'ngr/welcome', pathMatch: 'full'}
 ];
 
 @NgModule({
