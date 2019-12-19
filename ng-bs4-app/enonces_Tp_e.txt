@@ -32,7 +32,7 @@ enonces de Tps possibles (partie "e")
 
 5c IndexedDB via idb et les "Promise" et async/await
  - installer "idb" dans l'application angular via npm install -s idb
- - récupérer le service "ProductService" par copier/coller de fichier ".ts"
+ - récupérer le service "ProductService" et la classe "Produit" par copier/coller de fichier ".ts"
    à partir d'une version récente de l'application exemple ng-bs4-app
  - récupérer le composant AdminProdIdbComponent par copier/coller du répertoire
    "admin-prod-idb" de ng-bs4-app/src/app/advanced
@@ -48,7 +48,7 @@ enonces de Tps possibles (partie "e")
      - sur une détection d'un basculement en mode "onLine" (par exemple après un offLine forcé)
        recupérer tout le contenu du store "products" de la base "my-idb"
        de indexedDB et afficher ceci au format JSON dans console.log
-       sachant qu'avec beaucoup plus de temps on pourrai envoyer
+       sachant qu'avec beaucoup plus de temps on pourrait envoyer
        toutes ces données à une api REST coté serveur pour synchroniser
        ou transférer la base locale indexedDB/my-idb avec une base distante
        partagée . 

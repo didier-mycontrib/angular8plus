@@ -31,7 +31,7 @@ variantes (possibles/faculatives) sur tva.component:
   (change) sur liste déroulante (<select>) .
 - afficher (pour le fun) le montant ht en bleu si positif (ou rouge si négatif)
   en utilisant la syntaxe [style.color]="..."
-  et/ou [style.class]="...." (+ classe de style coté .(s)css )
+  et/ou [class.className]="...." (+ classe de style coté .(s)css )
 
 3c. validations de formulaire (en mode "template-driven" puis éventuellement "model-driven")
 créer un nouveau composant "LoginComponent" de premier niveau (dans src/app)
@@ -110,15 +110,11 @@ console.log() ou alert() ou ...
 via quelques ajouts de console.log()
 
 3i. intégration d'un module de composants personnalisés et réutilisables "bs-util":
-- télécharger le zip de https://github.com/didier-mycontrib/tp_angular8+
+- télécharger le zip de https://github.com/didier-mycontrib/angular8plus
 - extraire le contenu de ce .zip dans un répertoire temporaire.
 - recopier toute la partie ng-bs4-app/src/bs-util au sein de votre projet angular
   my-app/src/bs-util (src/bs-util doit normalement être à coté de src/app) .
 - visualiser le contenu de src/bs-util/bs-util.module.ts (la partie exports).
-.my-bg-primary {
-	background-color: #499de5;  
-} doit idéalement être ajouté (car manquant) dans 
-bsu-util/bsu-toogle-panel/bsu-toggle-panel.component.css
 - revenir sur src/app.module.ts et ajouter BsUtilModule dans la partie imports .
 - utiliser ensuite <bsu-toggle-panel [title]="'...'" > ... </bsu-toggle-panel>
   dans src/app/basic/basic.component.html ou ailleurs .

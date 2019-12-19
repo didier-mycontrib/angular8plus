@@ -118,6 +118,58 @@ backend nodeJs/express de façon à tout télécharger depuis le même endroit (
   configuré dans les routes (ex: "adminDevise" ou un autre à défaut) .
 
 4h. Tp routing évolué (après avoir abordé le milieu du chapitre "routing")
+VERSION COURTE (conseillée):
+----------------------------
+Le composant intermediaire "basic" (comportant les sous composants "tva" et "calculatrice")
+a déjà été codé en 3 variantes :
+   1) avec <app-calculatrice> et <app-tva> toujours affichés
+   2) avec basculement via onglets dynamiques de ngx-bootstrap (tabset,tab)
+   3) avec intégration dans <bsu-toggle-panel>
+On va maintenant mettre en oeuvre une quatrième variante utilisant un sous-niveau 
+"children : []" du routing angular et une nouvelle utilisation de <router-outlet>.
+Premiere version:
+- ajouter <router-outlet></router-outlet> dans basic.component.html
+  et commenter/retirer les anciens blocs <bsu-toggle-panel> ou <tabset><tab>...</>
+     ou <app-tva> et <app-calculatrice>
+- ajouter dans basic.component.html
+   <a routerLink="/basic/calculatrice" >calculatrice</a><br/>
+   <a routerLink="/basic/calculatrice" >calculatrice</a><br/>
+- ajuster un bloc de configuration de ce type dans app-routing.module.ts:
+ { path: 'basic', component: BasicComponent ,
+ children: [
+  { path: 'tva', component: TvaComponent },
+  { path: 'calculatrice', component: ....Component },
+  { path: '', redirectTo: 'tva', pathMatch: 'prefix'}
+  ]
+ }
+- tester le nouveau comportement de l'application
+Seconde version (avec 2 modes sur calculatrice : "simple" et "sophistiquee"):
+- ajouter (dans calculatrice.component.ts):
+  modeChoisi : string;
+- ajouter (dans calculatrice.component.html) un paramétrage pour faire en
+  sorte que le bouton poussoir "multiplication" ne soit affiché
+  que si modeChoisi=='sophistiquee'
+
+- ajuster les liens hypertextes suivants (basic.component.html):
+    <a routerLink="/basic/calculatrice/simple" >calculatrice simple</a><br/>
+    <a routerLink="/basic/calculatrice/sophistiquee" >calculatrice sophistiquee</a><br/>
+- ajuster la route imbriquée au sein app-routing.module.ts:
+children: [ ...,
+  { path: 'calculatrice/:mode', component: CalculatriceComponent }, ...
+  ]
+- ajouter et ajuster (dans calculatrice.component.ts):
+constructor(route : ActivatedRoute) {
+    route......subscribe(
+      (params: ....=> {
+        this.modeChoisi = params[....];
+      }
+    )
+    //NB:  { path: 'calculatrice/:mode', ... },
+   }
+- tester le nouveau comportement de l'application
+--------------------------
+VERSION LONGUE (rarement le temps en Tp):
+---------------
 - récupérer (par copier/coller) le code du service "ProductService"
   src/app/common/service/product.service.ts à recopier du projet exemple ng-bs4-app
   vers votre projet "my-app" .
