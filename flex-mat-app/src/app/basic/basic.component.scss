@@ -1,1 +1,14 @@
-.basic { background: white;  border: 1px; border-style:solid; border-color:white }
+.basic { background: white;   }
+.my-card { border: 1px; border-style:solid; border-color:blue ;
+           padding : 0 }
+
+.my-card-header {
+   background-color: rgb(23, 23, 112);
+   color : white;
+   padding-left: 1em;
+   padding-top: 0.5em;
+}
+
+.my-card-content {
+    padding: 1em;
+ }

@@ -36,6 +36,14 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { WithAnimationsComponent } from './advanced/with-animations/with-animations.component';
 import { ChatComponent } from './advanced/chat/chat.component';
 import { AdminProdIdbComponent } from './advanced/admin-prod-idb/admin-prod-idb.component';
+import { WithTraductionComponent } from './advanced/with-traduction/with-traduction.component';
+import { WithInjectionComponent } from './advanced/with-injection/with-injection.component';
+import { MyStringService } from './advanced/service/MyStringService';
+import { MyStringServiceV1 } from './advanced/service/MyStringServiceV1';
+import { MyStringServiceV2 } from './advanced/service/MyStringServiceV2';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import { AsidePanelAComponent } from './aside-panel-a/aside-panel-a.component';
+import { AsidePanelBComponent } from './aside-panel-b/aside-panel-b.component';
 
 //this sub function will be used by automatic internal 
 //interceptor of JwtModule (@auth0/angular-jwt)
@@ -66,7 +74,12 @@ export function myTokenGetter() {
     AdminSecurityComponent,
     WithAnimationsComponent,
     ChatComponent,
-    AdminProdIdbComponent
+    AdminProdIdbComponent,
+    WithTraductionComponent,
+    WithInjectionComponent,
+    NotAuthorizedComponent,
+    AsidePanelAComponent,
+    AsidePanelBComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +96,7 @@ export function myTokenGetter() {
     })
   ],
   providers: [
+    { provide: MyStringService, useClass: MyStringServiceV2 }
      /* { provide: HTTP_INTERCEPTORS,
         useClass: MyAuthInterceptor,
         multi: true    } */

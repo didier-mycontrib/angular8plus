@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasicComponent implements OnInit {
 
+  numSel :number =2;
+
   constructor() { }
 
   ngOnInit() {

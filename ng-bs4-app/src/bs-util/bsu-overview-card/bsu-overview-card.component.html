@@ -1,5 +1,5 @@
 <div class="card" [style.height]="'100%'">
-		<div class="card-header my-bg-primary">
+		<div class="card-header bg-secondary">
 			<h4 class="text-white">{{title}}</h4> 
 		</div> 
 		<div class="card-body" >
@@ -16,4 +16,18 @@
 	</div> 
 
 	<bsu-modal [title]="title" #myModal
-	           [innerHtmlText]="bigModalInnerHtmlText"></bsu-modal>
+			   [innerHtmlText]="bigModalInnerHtmlText"></bsu-modal>
+			   
+<!--
+	in app module ,
+	smallInnerHtmlText may contain :
+	   <img src="'+imgSrc+'" class="maxOverviewSized" /> <br/>
+	and styles.css may contain:
+		img.maxOverviewSized {
+			max-height : 250px ;
+			/*width : 100%;*/
+			max-width : 100%  ;
+			height: auto ;
+			width : auto ;
+	      }	
+-->			   

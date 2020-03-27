@@ -5,6 +5,7 @@ import { AuthRequest } from '../data/auth-request';
 import { AuthResponse } from '../data/auth-response';
 import { tap } from 'rxjs/operators';
 
+
 export interface SecureModeDto{
   secureMode: boolean;
 }

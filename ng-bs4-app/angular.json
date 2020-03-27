@@ -36,6 +36,21 @@
             "scripts": []
           },
           "configurations": {
+            "fr": {
+              "aot": true,
+              "outputPath": "dist/myapp-fr/",
+              "i18nFile": "src/locale/messages/messages.fr.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "fr",
+              "i18nMissingTranslation": "error"
+            },
+            "de": {
+              "aot": true,
+              "outputPath": "dist/myapp-de/",
+              "i18nFile": "src/locale/messages/messages.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -75,6 +90,12 @@
           "configurations": {
             "production": {
               "browserTarget": "ng-bs4-app:build:production"
+            },
+            "fr": {
+              "browserTarget": "ng-bs4-app:build:fr"
+            },
+            "de": {
+              "browserTarget": "ng-bs4-app:build:de"
             }
           }
         },

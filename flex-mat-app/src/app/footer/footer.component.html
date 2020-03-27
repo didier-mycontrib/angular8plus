@@ -1,1 +1,8 @@
-<div class="my-footer">footer - <a [routerLink]="['/welcome']">welcome</a> </div>
+<div class="my-footer">footer - <a [routerLink]="['/welcome']">welcome</a> &nbsp; &nbsp; &nbsp;
+    <mat-form-field [appearance]="settingService.my_mat_appearence">
+            <mat-label>appearance:</mat-label>
+            <mat-select placeholder="appearance" name="appearance" [(ngModel)]="settingService.my_mat_appearence" >
+                 <mat-option *ngFor="let app of settingService.mat_appearences" [value]="app">{{app}}</mat-option>   
+            </mat-select>  
+        </mat-form-field> 
+</div>

@@ -9,7 +9,7 @@ import { OnlineOfflineService } from '../common/service/online-offline.service';
 })
 export class FooterComponent implements OnInit {
 
-  private onLine:boolean;
+  public onLine:boolean;
 
   constructor(public authService: AuthService,
               private onlineOfflineService: OnlineOfflineService) {}

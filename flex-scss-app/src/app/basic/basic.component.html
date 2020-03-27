@@ -1,18 +1,44 @@
 <div class="basic">
   <p>basic sub-component</p>
   
-  <div class="card">
+  <div class="card primary">
     <div class="header center">
       card header 1
     </div>
     <div class="body">
       <h4><b>card body 1</b></h4>
       <p>details 1</p>
+      <select [(ngModel)]="numSel">
+           <option>1</option> <option>2</option>
+           <option>3</option> <option>4</option>
+      </select>
+      <input type="button" [class.highlight]="numSel==1" value="b1" />   <input type="button" [class.highlight]="numSel==2"  value="b2" />
+      <input type="button" [class.highlight]="numSel==3" value="b3" />   <input type="button" [class.highlight]="numSel==4"  value="b4" />
+
+      <div class="secondary card">
+        <div class="header center">
+          secondary card header
+        </div>
+        <div class="body">
+          <h4><b>secondary card body</b></h4>
+          <p>details xyz</p>
+      </div>
+      <div class="footer center">
+        secondary card footer
+      </div>
     </div>
     <div class="footer center">
         card footer 1
       </div>
   </div> 
+
+  <hr/>
+  <div class="bg-inv-primary">
+    <p class="txt-primary"> txt-primary on bg-inv-primary </p>
+    <p class="txt-hl-primary"> txt-hl-primary on bg-inv-primary </p>
+  </div>
+
+  <hr/>
 
   <mgc-toggle-panel [title]="'panel1'" >
      content of panel 1

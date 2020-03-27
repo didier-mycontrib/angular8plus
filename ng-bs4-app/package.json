@@ -4,9 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:fr": "ng serve --configuration=fr",
+    "start:de": "ng serve --configuration=de",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "build:fr": "ng build --configuration=fr",
+    "build:de": "ng build --configuration=de",
     "e2e": "ng e2e"
   },
   "private": true,

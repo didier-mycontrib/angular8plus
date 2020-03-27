@@ -1,4 +1,11 @@
-<div class="my-header">{{title}}
-    - <a [routerLink]="['/welcome']">welcome</a>
-    - <a [routerLink]="['/basic']">basic</a>
+<div class="my-header">
+        <mat-toolbar>
+            <mat-toolbar-row>
+                             <button mat-icon-button (click)="sideNav.toggle()">
+                                     <!-- <mat-icon>arrow_left</mat-icon> -->
+                                     <mat-icon>menu</mat-icon>   
+                             </button>
+                        <span> {{ title }} </span>
+            </mat-toolbar-row>
+        </mat-toolbar>
 </div>

@@ -1,4 +1,4 @@
-<div class="my-footer">footer - <a [routerLink]="['/ngr/welcome']">welcome</a> 
+<div class="my-footer">footer - <a [routerLink]="[ { outlets: { primary : ['/ngr/welcome'] , aside : ['asidePanelB'] } } ]">welcome</a> 
  - secureMode=<b>{{authService.currentSecureMode}}</b>
 <span [style.display]="authService.lastAuthResponse?'inline':'none'" > - username=<b>{{authService.lastAuthResponse?.username}}</b> , roles=<b>{{authService.lastAuthResponse?.roles}}</b></span> 
 - onLine={{onLine}}

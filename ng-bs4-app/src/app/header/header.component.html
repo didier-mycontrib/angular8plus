@@ -1,1 +1,2 @@
-<bsu-nav-bar [brandTitle]="title" [menuDefs]="myMenuDefs"></bsu-nav-bar>
+<bsu-nav-bar [brandTitle]="title" [menuDefs]="myMenuDefs"
+[currentUserRoles]="authService.lastAuthResponse?.roles"></bsu-nav-bar>

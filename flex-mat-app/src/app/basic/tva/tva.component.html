@@ -1,0 +1,20 @@
+<div>
+<form role="form"  class="form-container" >
+<mat-form-field [appearance]="settingService.my_mat_appearence">
+    <mat-label>ht:</mat-label>
+    <input matInput placeholder="ht" name="ht" [(ngModel)]="ht" (input)="onCompute()"  /> 
+    <!-- <mat-icon matSuffix>favorite</mat-icon> -->
+    <mat-hint>montant hors taxe</mat-hint>
+</mat-form-field> 
+<mat-form-field [appearance]="settingService.my_mat_appearence">
+    <mat-label>taux (en%):</mat-label>
+    <mat-select placeholder="taux" name="taux" [(ngModel)]="taux" 
+             (selectionChange)="onCompute()">
+         <mat-option *ngFor="let t of listeTaux" [value]="t">{{t}}</mat-option>   
+    </mat-select>  
+</mat-form-field> 
+
+</form>
+tva: <span>{{tva | currency:'EUR':'symbol':'1.0-2'}}</span> <br/>
+ttc: <span>{{ttc | currency:'EUR':'symbol':'1.0-2'}}</span> 
+</div>

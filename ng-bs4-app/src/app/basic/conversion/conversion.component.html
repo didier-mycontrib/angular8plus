@@ -1,14 +1,14 @@
 <div class="conv">
 <form role="form"  class="form-horizontal" >
-    <bsu-my-fg-label label='montant à convertir'>
+    <bsu-my-fg-label proportion="4-8" label='montant à convertir'>
       <input name="montantSource" [(ngModel)]="montantSource" />
     </bsu-my-fg-label>
-    <bsu-my-fg-label label='monnaie source'>
+    <bsu-my-fg-label proportion="4-8" label='monnaie source'>
         <select name="source" [(ngModel)]='source'>
               <option *ngFor="let d of devises">{{d.code}}</option>
         </select> 
     </bsu-my-fg-label>    
-    <bsu-my-fg-label label='monnaie cible'>                  
+    <bsu-my-fg-label proportion="4-8" label='monnaie cible'>                  
         <select name="cible" [(ngModel)]='cible'>
                 <option *ngFor="let d of devises">{{d.code}}</option>
           </select>

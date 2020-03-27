@@ -1,7 +1,17 @@
-<div  id="main-panel" class="card fondParDefaut">
-  <app-header [title]="title"></app-header>
-  <hr [style.margin-top]="'0px'" />
-  <router-outlet></router-outlet>
-  <hr/>
+<!-- not container , not container-fluid for no margin 
+     but padding-left & paddin-right in header , my-content and footer -->
+<div  id="main-panel" class="card"> 
+  <app-header [title]="title" class="sticky-top"></app-header>
+ <div class="container my-content">
+  <div class="row">
+     <div class="col-sm-1">
+         <router-outlet name="aside"></router-outlet> <!-- secondary outlet with name -->
+      </div>
+      <div class="col-sm-11">
+          <router-outlet></router-outlet> 
+          <!-- main outlet without specified name , default_name="primary" -->
+      </div>
+  </div>
+</div>
   <app-footer></app-footer>
 </div>

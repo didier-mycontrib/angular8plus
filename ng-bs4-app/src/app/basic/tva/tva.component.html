@@ -1,18 +1,18 @@
 <div>
 <form role="form"  class="form-horizontal" >
-<bsu-my-fg-label label='ht'>
+<bsu-my-fg-label proportion="2-10" label='ht'>
     <input name="ht" [(ngModel)]="ht" (input)="onCompute()" class="form-control"/> 
 </bsu-my-fg-label> 
-<bsu-my-fg-label label='taux'>
+<bsu-my-fg-label proportion="2-10" label='taux'>
     <select name="taux" [(ngModel)]="taux" 
             class="form-control" (change)="onCompute()">
          <option *ngFor="let t of listeTaux">{{t}}</option>   
     </select>  
 </bsu-my-fg-label> 
-<bsu-my-fg-label label='tva'>
+<bsu-my-fg-label proportion="2-10" label='tva'>
     <span>{{tva | currency:'EUR':'symbol':'1.0-2'}} </span> 
 </bsu-my-fg-label> 
-<bsu-my-fg-label label='ttc'>
+<bsu-my-fg-label proportion="2-10" label='ttc'>
     <span>{{ttc | currency:'EUR':'symbol':'1.0-2'}}</span> 
 </bsu-my-fg-label> 
 </form>

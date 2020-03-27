@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'bsu-toggle-panel',
   templateUrl: './bsu-toggle-panel.component.html',
-  styleUrls: ['./bsu-toggle-panel.component.css']
+  styleUrls: ['./bsu-toggle-panel.component.scss']
 })
 export class BsuTogglePanelComponent implements OnInit {
 

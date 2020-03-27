@@ -42,7 +42,41 @@
     background-color: myColor(bg-primary);
   }
 
+  .card>.header:hover {
+    color : myColor(txt-inv-hl-primary);
+  }
+
   .card>.footer {
     color : myColor(dark);
     background-color: myColor(light);
+  }
+
+  input[type=button]{
+    color : myColor(txt-inv-primary);
+    background-color: myColor(bg-primary);
+  }
+
+  input[type=button].highlight{
+    color : myColor(txt-inv-primary);
+    background-color: myColor(bg-hl-primary);
+  }
+
+  input[type=button]:hover{
+    color : myColor(txt-inv-hl-primary);
+    background-color: myColor(bg-primary);
+  }
+
+  input[type=button].highlight:hover{
+    color : myColor(txt-inv-hl-primary);
+    background-color: myColor(bg-hl-primary);
+  }
+
+  h4{
+    color :  myColor(txt-primary);
+    background-color: myColor(bg-inv-primary);
+  }
+
+  h4:hover{
+    color :  myColor(txt-hl-primary);
+    background-color: myColor(bg-inv-primary);
   }

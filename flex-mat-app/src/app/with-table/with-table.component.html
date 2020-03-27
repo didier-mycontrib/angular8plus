@@ -1,0 +1,80 @@
+<h4>table of countries (click on column header to sort)</h4>
+
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" 
+          placeholder="Ex. i">
+</mat-form-field>
+<div class="my-table-container-for-scroll">
+<table mat-table [dataSource]="dataSource" matSort>
+
+ <!--- Note that these columns can be defined in any order.
+       The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- code Column -->
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef> code </th>
+          <td mat-cell *matCellDef="let c"> {{c.code}} </td>
+          <td mat-footer-cell *matFooterCellDef>Total</td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> name </th>
+          <td mat-cell *matCellDef="let c"> {{c.name}} </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+      
+        <!-- Capital-city Column -->
+        <ng-container matColumnDef="capital_city">
+          <th mat-header-cell *matHeaderCellDef> capital city </th>
+          <td mat-cell *matCellDef="let c"> {{c.capital_city}} </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+      
+        <!-- Population Column -->
+        <ng-container matColumnDef="population">
+          <!-- mat-sort-header only ok if matSort in table -->
+          <th mat-header-cell  *matHeaderCellDef mat-sort-header> population </th>
+          <td mat-cell *matCellDef="let c"> {{c.population}} </td>
+          <td mat-footer-cell *matFooterCellDef> {{getTotalPopulation()}}</td>
+        </ng-container>
+
+        <!-- Area Column -->
+        <ng-container matColumnDef="area">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> area </th>
+                <td mat-cell *matCellDef="let c"> {{c.area}} </td>
+                <td mat-footer-cell *matFooterCellDef> {{getTotalArea()}}</td>
+        </ng-container>
+
+        <!-- Checkbox selection Column -->
+        <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+           > <!-- (click)="selection.toggle(row)" --> </tr>
+        <!-- if mat-footer-row , mat-footer-cell must be defined for each displayedColumns --> 
+        <tr mat-footer-row *matFooterRowDef="displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[50, 20, 12 , 6 , 3]" showFirstLastButtons></mat-paginator>
+</div>
+Attention: la selection globale et calcul du total ne tient pas compte de la pagination (par defaut)<br/>
+selected countries : {{selection._selected | json}}
+      
+      

@@ -1,8 +1,8 @@
 /* _base.scss = variables + mixins , @import in styles.scss */
 
-//$default-theme : "blue-theme";
+$default-theme : "blue-theme";
 //or
-$default-theme : "green-theme";
+//$default-theme : "green-theme";
 //or ...
 
 //named color map:
@@ -10,14 +10,61 @@ $default-theme : "green-theme";
 //                         or : map-get($colors,primary)
 //
 //txt-xxx = couleur du texte (ex: sur fond clair)
+//txt-hl-xxx = variante "highlight" de txt-xxx (pour montrer sélection en :hover par exemple)
 //bg-xxx = couleur du fond (ex: foncé pour menu , encadrement, bouton)  
+//bg-hl-xxx = variante pour "highlight" (pour montrer sélection courante sans survol souris)
 //bg-inv-xxx =couleur de fond inversé (pour contraste contenu textuel ...)
 //txt-inv-xxx = couleur du texte inversé (ex: texte de bouton)
-//REGLE DE CONTRASTE : txt-xxx ok avec bg-inv-xxx
-//                     txt-inv-xxx ok avec bg-xxx
+//txt-inv-hl-xxx = variante "highlight" de txt-inv-xxx (pour montrer sélection en :hover par exemple)
+//REGLE DE CONTRASTE : txt-xxx (et/ou txt-hl-xxx) ok avec bg-inv-xxx
+//                     txt-inv-xxx (et/ou txt-inv-hl-xxx) ok avec bg-xxx
 //REGLE d'HARMONIE : primary , secondary , ... doivent cohabiter harmonieusement
 //utilisation-type : card avec titre (txt-inv-xxx sur fond bg-xxx)
 //                     et avec contenu (txt-xxx sur fond bg-inv-xxx) 
+
+
+$colors-by-theme:( 
+  blue-theme :(
+      txt-primary:   #150f46,
+      bg-primary:    #04245a,
+      bg-hl-primary:    #501750,
+      txt-inv-primary:  #ffffff,
+      txt-inv-hl-primary:  #f7f314,
+
+      txt-secondary: #031c46,
+      bg-inv-secondary: #ffffff,
+      bg-secondary:  #413f3f,
+      txt-inv-secondary:  #ffffff,
+
+      txt-secondary2: #46032c,
+      bg-inv-secondary2: #ffffff,
+      bg-secondary2:  #413f3f,
+      txt-inv-secondary2:  #ffffff
+      ),
+    green-theme :(
+        txt-primary:   #092401,
+        bg-primary:    #1f5320,
+        bg-hl-primary:    #176b80,
+        txt-inv-primary:  #ffffff,
+        txt-inv-hl-primary:  #f3e51a,
+  
+        txt-secondary: #031c46,
+        bg-inv-secondary: #ffffff,
+        bg-secondary:  #413f3f,
+        txt-inv-secondary:  #ffffff,
+
+        txt-secondary2: #70500a,
+        bg-inv-secondary2: #ffffff,
+        bg-secondary2:  #413f3f,
+        txt-inv-secondary2:  #ffffff
+        )
+);
+//+eventuellement secondary3 et secondary4 en harmonie
+//NB: on pourra appliquer les variantes suivantes
+//    sur xxx=primary ou secondary ou secondary2 , ...
+//    lighten(myColor(...),10_ou_20%)
+//    darken(myColor(...),10_ou_20%)
+
 
 $basic-colors: (
   txt-default:   #000000,
@@ -66,45 +113,7 @@ $custom-colors: (
   my-light-blue:       #488aff,
 );
 
-$colors-by-theme:( 
-  blue-theme :(
-      txt-primary:   #000000,
-      bg-inv-primary: #ffffff,
-      bg-primary:    #031c46,
-      txt-inv-primary:  #ffffff,
 
-      txt-secondary: #031c46,
-      bg-inv-secondary: #ffffff,
-      bg-secondary:  #413f3f,
-      txt-inv-secondary:  #ffffff,
-
-      txt-secondary2: #46032c,
-      bg-inv-secondary2: #ffffff,
-      bg-secondary2:  #413f3f,
-      txt-inv-secondary2:  #ffffff
-      ),
-    green-theme :(
-        txt-primary:   #000000,
-        bg-inv-primary: #ffffff,
-        bg-primary:    #4caf50,
-        txt-inv-primary:  #ffffff,
-  
-        txt-secondary: #031c46,
-        bg-inv-secondary: #ffffff,
-        bg-secondary:  #413f3f,
-        txt-inv-secondary:  #ffffff,
-
-        txt-secondary2: #70500a,
-        bg-inv-secondary2: #ffffff,
-        bg-secondary2:  #413f3f,
-        txt-inv-secondary2:  #ffffff
-        )
-);
-//+eventuellement secondary3 et secondary4 en harmonie
-//NB: on pourra appliquer les variantes suivantes
-//    sur xxx=primary ou secondary ou secondary2 , ...
-//    lighten(myColor(...),10_ou_20%)
-//    darken(myColor(...),10_ou_20%)
 
 
 
@@ -123,7 +132,14 @@ $colors-by-theme:(
 //exemple : background-color: colorOfTheme("bg-primary","blue-theme")
 //or background-color: colorOfTheme(bg-primary,blue-theme)
 @function colorOfTheme($colorNameOrColorKey,$themeNameOrKey) { 
-  @return map-get(map-get($colors-by-theme,$themeNameOrKey),$colorNameOrColorKey); 
+  $res :  map-get(map-get($colors-by-theme,$themeNameOrKey),$colorNameOrColorKey); 
+  @if($res == null and $colorNameOrColorKey == 'txt-hl-primary'){
+    $res : colorOfTheme('bg-primary',$themeNameOrKey);
+  }
+  @if($res == null and $colorNameOrColorKey == 'bg-inv-primary'){
+    $res : colorOfTheme('txt-inv-primary',$themeNameOrKey);
+  }
+  @return $res;
 }
 
 
@@ -144,5 +160,11 @@ $colors-by-theme:(
     $res : customColor($colorNameOrColorKey);
   }
   @return $res;
+}
+
+
+//applications (ici directe) avec classes de styles élémentaires et complémentaires:
+.bg-inv-primary{
+  background-color: myColor(bg-inv-primary);
 }
 

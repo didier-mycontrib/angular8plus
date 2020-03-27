@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Publication } from '../common/data/publication';
 import { ContextCard } from './ContextCard';
 import { PublicationService } from '../common/service/publication.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-news',
@@ -13,6 +14,8 @@ export class NewsComponent implements OnInit {
   tabPublicationNews : Publication[] =[];
   contextCardsNews : ContextCard[]= [];
 
+  /*
+  // v1 sans resolver:
   constructor(private _publicationService : PublicationService) { }
   
   loadPublication(){
@@ -31,6 +34,22 @@ export class NewsComponent implements OnInit {
 
   ngOnInit() {
     this.loadPublication();
+  }
+
+  */
+
+  //V2 (avec resolver):
+  //{ path: 'ngr/news', component: NewsComponent , resolve: { publications: NewsResolver }} ,
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+	  this.route.data.subscribe(
+		( data: { publications: Publication[] } ) => {
+						this.tabPublicationNews=data.publications;
+						this.contextCardsNews=this.build_overview_cards_context_from_publications(this.tabPublicationNews);
+		  } ,
+		(error) => { console.log( " error : " + error ) ; }
+	  );
   }
 
   //en entree publication (provenant de la base de données et vehiculées via WS REST JSON

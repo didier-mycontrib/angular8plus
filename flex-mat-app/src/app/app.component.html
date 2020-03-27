@@ -1,5 +1,14 @@
 <div class="my-app">
-  <app-header [title]="title"></app-header>
-    <router-outlet></router-outlet>
-  <app-footer></app-footer>
+  <mat-sidenav-container >
+      <!-- mode = side , push (auto-close when click on main content) or
+                         over (idem as push but over / no slide )-->
+      <mat-sidenav #mySideNav mode="side" opened="false">
+          <app-my-side-nav [sideNav]="mySideNav"></app-my-side-nav>
+      </mat-sidenav>
+      <mat-sidenav-content class="main-zone">
+        <app-header [title]="title" [sideNav]="mySideNav"></app-header>
+        <router-outlet></router-outlet>
+        <app-footer></app-footer>
+     </mat-sidenav-content>
+</mat-sidenav-container>
 </div>

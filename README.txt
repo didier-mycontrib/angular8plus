@@ -1,5 +1,6 @@
 Exemples (de base)
 ------------------
+basic-app = application simple (mais avec tests unitaires , ...)
 my-app = exemple de point de départ pour TP (sans bootstrap ni material , juste flex-layout)
 ng-bs4-app = exemple basé sur ngx-bootstrap et bootstrap 4
 flex-mat-app = exemple basé sur @angular-material et flex-layout

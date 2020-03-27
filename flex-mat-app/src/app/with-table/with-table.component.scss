@@ -1,0 +1,32 @@
+
+
+  .selected {
+    background-color: red;
+  }
+   
+  .mat-row.highlighted {
+    background: lightblue;
+  }
+   
+  table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+  }
+   
+  .mat-header-cell, .mat-sort-header {
+    background-color: lightblue;
+    font-weight: bold;
+  }
+   
+
+.my-table-container-for-scroll{
+  height: 400px;
+  overflow: auto;
+}  
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+

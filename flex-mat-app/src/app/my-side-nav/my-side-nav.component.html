@@ -1,0 +1,25 @@
+
+<mat-nav-list> 
+      <button mat-icon-button (click)="sideNav.close()">
+                  <mat-icon>arrow_right</mat-icon>
+      </button>
+      <!--  <a (click)="sideNav.close()" /> if mode="side" --> 
+      <a mat-list-item routerLink='/welcome' (click)="sideNav.close()" >welcome</a>
+      <a mat-list-item routerLink='/basic' (click)="sideNav.close()" >basic</a>
+      <button mat-icon-button [matMenuTriggerFor]="menuSuite">
+            <mat-icon>more_vert</mat-icon>
+      </button>
+  </mat-nav-list>
+
+  <mat-menu #menuSuite="matMenu">
+      <a mat-menu-item [routerLink]="['/withSteps']">with steps</a>
+      <button mat-menu-item [matMenuTriggerFor]="subMenu1">advanced</button>
+</mat-menu>
+
+<mat-menu #subMenu1="matMenu">
+      <button mat-menu-item [routerLink]="['/withTable']" >with table</button>
+      <button mat-menu-item [routerLink]="['/withTree']" >with tree</button>
+</mat-menu>
+
+
+

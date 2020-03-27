@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuDefinition } from 'src/bs-util/data/MenuDefinition';
+import { AuthService } from '../common/service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
   title : string ="myApp" //as default value
 
   myMenuDefs :MenuDefinition[] = [
-    { label : "basic" , path : 'bgr/basic' },
+    { label : "basic" , path : 'ngr/basic' },
     { label : "news" , path : "ngr/news" },
     { label : "browse-products" , path : "ngr/browse-products" },
     { label : "admin" , 
@@ -21,15 +22,17 @@ export class HeaderComponent implements OnInit {
         { divider : true },
         { label : "login" , path : "ngr/login" } ,
         { divider : true },
-        { label : "admin-news (publisher)" , path : "ngr/admin-news" } ,
+        { label : "admin-news (publisher)" , path : "ngr/admin-news" , role : "admin"} ,
         { divider : true },
-        { label : "devise (admin)" , path : "ngr/admin-devise" },
+        { label : "devise (admin)" , path : "ngr/admin-devise" , role : "admin"},
         { label : "stats (admin)" , path : "ngr/stats" }
       ]
     } ,
     { label : "advanced" , 
       children : [
         { label : "animations" , path : "ngr/with-animations" },
+        { label : "traductions" , path : "ngr/with-traductions" },
+        { label : "injections" , path : "ngr/with-injections" },
         { divider : true },
         { label : "admin-prod (indexedDB)" , path : "ngr/admin-prod-idb" },
         { divider : true },
@@ -37,7 +40,7 @@ export class HeaderComponent implements OnInit {
       ]
     }];
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
   }

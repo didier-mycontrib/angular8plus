@@ -4,9 +4,12 @@ import { MenuDefinition } from "src/bs-util/data/MenuDefinition";
 @Component({
   selector: 'bsu-dropdown-menu',
   templateUrl: './bsu-dropdown-menu.component.html',
-  styleUrls: ['./bsu-dropdown-menu.component.css']
+  styleUrls: ['./bsu-dropdown-menu.component.scss' , '../css/bs-util.scss']
 })
 export class BsuDropdownMenuComponent implements OnInit {
+
+  @Input() //settings passed from grand parent to parent to child component
+  public currentUserRoles : String=null;
 
   //toggleM : boolean =false; //for old version without ng-bootstrap
 

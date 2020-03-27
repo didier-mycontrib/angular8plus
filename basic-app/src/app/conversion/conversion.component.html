@@ -1,0 +1,20 @@
+<div>
+<form>
+    <label>montant à convertir:</label>
+    <input name="montantSource" [(ngModel)]="montantSource" />
+    <br/>
+    <label>monnaie source:</label>
+    <select name="source"  [(ngModel)]='source'>
+          <option *ngFor="let d of devises">{{d.code}}</option>
+    </select> 
+    <br/>  
+    <label>monnaie cible:</label>                
+    <select name="cible" [(ngModel)]='cible'>
+            <option *ngFor="let d of devises">{{d.code}}</option>
+    </select>
+    <br/>
+<input type='button' id="btnConv" value='convertir' (click)="onConvertir($event)" /> <br/> 
+</form>
+<hr/>
+montant converti : <b>{{montantCible | number:'1.0-2'}}</b>
+</div>

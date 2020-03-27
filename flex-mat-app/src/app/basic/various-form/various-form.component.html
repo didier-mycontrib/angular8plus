@@ -1,0 +1,76 @@
+<div>
+    <form role="form"  class="form-container" >
+    <mat-form-field [appearance]="settingService.my_mat_appearence">
+         <!-- [hideRequiredMarker]="false" [floatLabel]="'auto'" by default on mat-form-field -->
+        <mat-label>full name:</mat-label>
+        <input matInput placeholder="name" name="name" 
+               minLength="6" maxlength="20" required 
+              [(ngModel)]="person.name"  /> 
+        <!-- <mat-icon matSuffix>favorite</mat-icon> -->
+        <mat-hint align="end">full name</mat-hint>
+    </mat-form-field> 
+    <!--
+    <mat-form-field [appearance]="settingService.my_mat_appearence">
+        <mat-label>kind:</mat-label>
+        <mat-select placeholder="kind" name="kind" [(ngModel)]="person.kind" >
+             <mat-option *ngFor="let k of listeKind" [value]="k">{{k}}</mat-option>   
+        </mat-select> 
+   </mat-form-field> 
+    -->
+   <div>
+        <label>kind: </label>   
+        <mat-radio-group placeholder="kind" name="kind" [(ngModel)]="person.kind" >
+            <mat-radio-button matInput *ngFor="let k of listeKind" [value]="k">{{k}}</mat-radio-button>
+        </mat-radio-group> 
+         <!-- mat-radio-group cannot be put inside mat-form-field , ??? -->
+    </div>
+     
+    <mat-form-field [appearance]="settingService.my_mat_appearence">
+            <mat-label>email:</mat-label>
+            <input matInput name="email" type="email" placeholder="email" [(ngModel)]="person.email" />
+    </mat-form-field>
+     
+    <mat-checkbox  name="crazy" [(ngModel)]="person.crazy" >crazy (as checkbox)</mat-checkbox>
+    <mat-slide-toggle name="crazy" [(ngModel)]="person.crazy" >crazy (as slide-toggle)</mat-slide-toggle>
+    <!-- mat-checkbox cannot be put inside mat-form-field , already has a label -->
+    
+    <mat-form-field [appearance]="settingService.my_mat_appearence">
+            <mat-label>birthday:</mat-label>
+            <input matInput name="birthday" [matDatepicker]="myDatePicker" 
+                    placeholder="birthday" [(ngModel)]="person.birthday" /> <!-- type="date" if no picker -->
+            <mat-datepicker-toggle matSuffix [for]="myDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #myDatePicker></mat-datepicker>
+    </mat-form-field> 
+
+    <mat-form-field [appearance]="settingService.my_mat_appearence">
+            <mat-label>childNumber:</mat-label>
+            <input matInput name="childNumber" type="number" placeholder="childNumber" [(ngModel)]="person.childNumber" />
+    </mat-form-field>
+    <mat-form-field [appearance]="settingService.my_mat_appearence">
+            <mat-label>preferedColor:</mat-label>
+            <input matInput name="preferedColor" type="color" placeholder="preferedColor" [(ngModel)]="person.preferedColor" />
+    </mat-form-field> 
+    <mat-form-field [appearance]="settingService.my_mat_appearence">
+            <mat-label>password:</mat-label>
+            <input matInput name="password" type="password" placeholder="password" [(ngModel)]="person.password" />
+    </mat-form-field> 
+    <mat-form-field [appearance]="settingService.my_mat_appearence">
+                <mat-label>country:</mat-label>
+                <input matInput name="country" placeholder="country" 
+                       (ngModelChange)="adjustfilteredCountries()"
+                       [(ngModel)]="person.country" [matAutocomplete]="autoCountry" />
+                <!-- for reactiveForm , [formControl]="myControl" and no ngModel -->
+                <mat-autocomplete #autoCountry="matAutocomplete">
+                                <mat-option *ngFor="let c of filteredCountries | async" [value]="c">
+                                  {{c}}
+                                </mat-option>
+                </mat-autocomplete>
+    </mat-form-field> 
+    <mat-form-field [appearance]="settingService.my_mat_appearence">
+            <mat-label>comment:</mat-label>
+            <textarea matInput name="comment" placeholder="comment" [(ngModel)]="person.comment"></textarea>
+    </mat-form-field> 
+    </form>
+    person: <span>{{person | json}}</span> <br/>
+    </div>
+    

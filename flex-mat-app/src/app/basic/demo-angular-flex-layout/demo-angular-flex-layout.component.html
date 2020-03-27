@@ -1,0 +1,53 @@
+<p>demo @angular/flex-layout</p>
+
+
+empilement (si moins de 960px):
+<div class="container" fxLayout.lt-md="column"
+fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.lt-md="2px">
+    <div class="a" fxFlex="25%">divA (25%)</div>
+    <div class="b" fxFlex="50%">divB (50%)</div>
+    <div class="c">divC</div>
+</div>
+<hr/>
+empilement (si moins de 600px):
+    <div  fxLayout.lt-sm="column"   >
+        <div class="a" fxFlex="33%">label_X</div> <div class="b" fxFlex="66%">inputY</div>
+    </div>
+    <div  fxLayout.lt-sm="column"   > <!--  fxLayoutAlign="left"  by default -->
+        <div class="a" fxFlex="33%">label_YquiVaBien</div> <div class="b" fxFlex="66%">inputY</div>
+    </div>
+    <div  fxLayout.lt-sm="column"   >
+        <div class="c" fxFlex="66%" fxFlexOffset.gt-xs="33%" fxFlexOffset.lt-sm="0"  >with offset</div>
+    </div>
+    <hr/>
+    <table>
+        <tr>
+        <td>
+       <table border="1">
+            <tr><th>breakpoints</th><th>size(px)</th></tr>
+            <tr><td>xs (extra small)</td><td>599 ou moins</td></tr>
+            <tr><td>sm (small or medium)</td><td>600 à 959</td></tr>
+            <tr><td>md (medium) </td><td>960 à 1279</td></tr>
+            <tr><td>lg (large) </td><td>1280 à 1919</td></tr>
+            <tr><td>xl (extra large)</td><td>1920 à 5000</td></tr>
+        </table>
+    </td><td>
+        <table border="1">
+                <tr><th>breakpoints</th><th>size(px)</th></tr>
+                <tr><td><b>lt-sm</b> (less than small)</td><td>moins que <b>600</b></td></tr>
+                <tr><td><b>lt-md</b> (less than medium) </td><td>moins que <b>960</b></td></tr>
+                <tr><td><b>lt-lg</b> (less than large) </td><td>moins que <b>1280</b></td></tr>
+                <tr><td><b>lt-xl</b> (less than xl)</td><td>moins que <b>1920</b></td></tr>
+                <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+            </table>
+        </td><td>
+            <table border="1">
+                    <tr><th>breakpoints</th><th>size(px)</th></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>gt-xs (greater than xs)</td><td>600 ou plus</td></tr>
+                    <tr><td>gt-sm (greater than sm)</td><td>960 ou plus</td></tr>
+                    <tr><td>gt-md (greater than medium) </td><td>1280 ou plus</td></tr>
+                    <tr><td>gt-lg (greater than large) </td><td>1920 ou plus</td></tr>
+                </table>
+            </td> </tr>
+     </table>

@@ -1,0 +1,62 @@
+<mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+                expansion-panel (collapsible panel) with bagdes inside
+          </mat-panel-title>
+          <!-- <mat-panel-description>
+            click to show/hide content
+          </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <div>  
+            contenu qui va bien (avec badges and tooltips)
+            <p>
+               <span matBadge="ok" matBadgeOverlap="false">Text with a "ok" badge</span>
+             </p>
+             <button mat-raised-button color="primary"
+                   matBadge="*" matBadgePosition="before" matBadgeColor="accent">
+                  button with "*" badge
+            </button>
+    
+            <mat-icon matBadge="#" matBadgeColor="warn">home</mat-icon>
+            <br/><br/>
+            <button mat-raised-button color="primary" 
+            matTooltip="Info about the action"
+            matTooltipPosition="below"
+            >button with tooltips</button>      
+        </div>
+</mat-expansion-panel>
+<hr/>
+<mat-accordion>
+  <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>p1/spinner (exclusive with p2) in same accordion</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div> 
+            spinner (indicator for long time task)
+                <mat-spinner [style.visibility]="pending?'visible':'hidden'"></mat-spinner>
+                <mat-slide-toggle  [(ngModel)]="pending" >pending task</mat-slide-toggle>
+        </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>p2/dialog (exclusive with p1) in same accordion</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div> 
+                <ol>
+                        <li>
+                          <mat-form-field>
+                            <mat-label>What's your name?</mat-label>
+                            <input matInput [(ngModel)]="name">
+                          </mat-form-field>
+                        </li>
+                        <li>
+                          <button mat-raised-button (click)="openDialog()">open dialog</button>
+                        </li>
+                        <li *ngIf="animal">
+                          You chose: <i>{{animal}}</i>
+                        </li>
+                      </ol>
+                    
+        </div>
+  </mat-expansion-panel>
+</mat-accordion>

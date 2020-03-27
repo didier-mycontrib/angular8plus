@@ -4,11 +4,15 @@ import { MenuDefinition } from "src/bs-util/data/MenuDefinition";
 @Component({
   selector: 'bsu-nav-bar',
   templateUrl: './bsu-nav-bar.component.html',
-  styleUrls: ['./bsu-nav-bar.component.css']
+  styleUrls: ['./bsu-nav-bar.component.scss', '../css/bs-util.scss']
 })
-export class BsuNavBarComponent implements OnInit {
+export class BsuNavBarComponent implements OnInit  {
+  
 
   isNavbarCollapsed : boolean = true;
+
+  @Input()
+  public currentUserRoles : String=null; //ex: "admin,publisher"
 
   @Input()
   brandTitle : string ="my-app";

@@ -1,0 +1,12 @@
+<h3>temp test / value added tax</h3>
+      price excluded of tax: <input type='text' 	
+                         id='price_excluded_of_tax_input'
+                         [(ngModel)]='price_excluded_of_tax' 
+                         (input)='onRefresh($event)' /> <br/>
+      value added tax rate (%): <input type='text'
+					id='v_a_tax_rate_pct_input'
+                           [(ngModel)]='v_a_tax_rate_pct'
+                         (input)='onRefresh($event)' /> <br/>
+      price inclusive of tax : 
+                <span id='price_inclusive_of_tax_span'>
+                {{price_inclusive_of_tax}} </span><br/>

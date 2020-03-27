@@ -3,4 +3,5 @@ export class MenuDefinition {
     path? : string;
     children? : MenuDefinition[];
     divider? : boolean;
+    role? : string; //expected role for routerLink enable/display
 }

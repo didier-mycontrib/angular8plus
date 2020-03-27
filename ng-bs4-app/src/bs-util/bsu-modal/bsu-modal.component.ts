@@ -6,7 +6,7 @@ import { BsModalService , BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'bsu-modal',
   templateUrl: './bsu-modal.component.html',
-  styleUrls: ['./bsu-modal.component.css']
+  styleUrls: ['./bsu-modal.component.scss', '../css/bs-util.scss']
 })
 export class BsuModalComponent implements OnInit {
 

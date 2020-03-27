@@ -1,11 +1,17 @@
 <h3>with-animations</h3>
 <tabset>
-    <tab heading="@changeDivSize">
+    <tab>
+        <ng-template tabHeading>
+            <b>@changeDivSize</b>
+        </ng-template>
         <input type="checkbox" [(ngModel)]="myToggleValue" />myToggleValue<br/>
         <hr/>
         <div [@changeDivSize]="!myToggleValue?'smaller':'normal'">essai animation avec [@xyTrigger]="stateXorY"</div>        
     </tab>
-    <tab heading="@fadeInOut">
+    <tab>
+        <ng-template tabHeading>
+            <b>@fadeInOut</b>
+        </ng-template>
         <input type="radio" name="ulOrTable" [(ngModel)]="ulOrTable" [value]="'ul'" /> ul &nbsp;&nbsp;
         <input type="radio" name="ulOrTable" [(ngModel)]="ulOrTable" [value]="'table'" /> table <br/>
         <input type="button" value="add item" (click)="onAddItem()" /> &nbsp;
@@ -22,7 +28,10 @@
             </tr>
         </table>
     </tab>
-    <tab heading="@enterLeave">
+    <tab>
+        <ng-template tabHeading>
+            <b>@enterLeave</b>
+        </ng-template> 
         <input type="button" value="add item" (click)="onAddItem()" /> &nbsp;
         <input type="button" value="remove item" (click)="onRemoveItem()" /><br/>
         <br/>

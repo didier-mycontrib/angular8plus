@@ -4,7 +4,7 @@ import { Input } from "@angular/core";
 @Component({
   selector: 'bsu-overview-card',
   templateUrl: './bsu-overview-card.component.html',
-  styleUrls: ['./bsu-overview-card.component.css']
+  styleUrls: ['./bsu-overview-card.component.scss', '../css/bs-util.scss']
 })
 export class BsuOverviewCardComponent implements OnInit {
 

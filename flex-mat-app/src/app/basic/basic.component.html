@@ -1,11 +1,31 @@
 <div class="basic">
-  <p>basic sub-component</p>
-  <mat-tab-group>
-    <mat-tab label="One">
-      content tab 1
-    </mat-tab>
-    <mat-tab label="two">
-        content tab 2
-    </mat-tab>
-  </mat-tab-group>
+
+    <mat-card class="my-card">
+        <mat-card-header class="my-card-header">
+          <mat-card-title>Basic</mat-card-title>
+          <!-- <mat-card-subtitle>angular material</mat-card-subtitle> -->
+        </mat-card-header>
+        
+        <mat-card-content class="my-card-content">
+            <mat-tab-group>
+                <mat-tab label="tva">
+                  <app-tva></app-tva>
+                </mat-tab>
+                <mat-tab label="demo angular flexLayout">
+                    <app-demo-angular-flex-layout></app-demo-angular-flex-layout>
+                </mat-tab>
+                <mat-tab label="form(various)">
+                    <app-various-form></app-various-form>
+               </mat-tab>
+               <mat-tab label="divers">
+                   <app-divers></app-divers>
+              </mat-tab>
+            </mat-tab-group>
+              <img src="assets/images/calcul.jpg" height="200px" width="300px" alt="caddy lolgo">
+        </mat-card-content>
+      </mat-card>
+      
+
+
+  
 </div>
