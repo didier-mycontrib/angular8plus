@@ -1,0 +1,20 @@
+<div style="background-color:rgb(196,255,136)">values in this (parent) component:
+counter : {{counter}} 
+<button (click)="counter=counter+1">++</button> , 
+msg : {{msg}} <button (click)="msg=msg+'*'">++</button> , 
+data : ({{data.num}} <button (click)="data.num=data.num+1">++</button>,
+	    {{data.label}} <button (click)="data.label=data.label+'*'">++</button> 
+		)
+<hr/>
+<!-- 
+with no @input/property link and @ouput (messageEvent) :
+<basic-my-child (messageEvent)="onMessageEvent($event)"></basic-my-child>
+<hr>
+with @input/@ouput property link as [(message)] / messageChange event like [(ngModel)] :
+<basic-my-child [(message)]="msg"></basic-my-child>
+<hr/>
+-->
+with 3 @input/property links / [compteur]="counter" [message]="msg" [donnees]="data" :
+<basic-my-child [compteur]="counter" [message]="msg" [donnees]="data"></basic-my-child>
+</div>
+<b><i>LyfeCycle / ngOnChanges() , ngOnInit() --> console.log(...)</i></b>

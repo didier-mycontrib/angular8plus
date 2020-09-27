@@ -1,0 +1,8 @@
+<div style="background-color:rgb(255,255,128)">values in this (child) component:
+compteur : {{compteur}} 
+<button (click)="compteur=compteur+1">++</button> , 
+message : {{message}} <button (click)="message=message+'*' ; riseMessageEvent()">++</button> , 
+donnees : ({{donnees.num}} <button (click)="donnees.num=donnees.num+1">++</button>,
+	    {{donnees.label}} <button (click)="donnees.label=donnees.label+'*'">++</button> 
+		)
+</div>		

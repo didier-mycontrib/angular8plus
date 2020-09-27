@@ -1,0 +1,38 @@
+<p>with-directive works!</p>
+<span myHighlight>Highlight me!</span> 
+<p myHighlight="yellow"   >Highlight me!</p>
+
+<hr/>
+
+age: <input type='text' [(ngModel)]="age" /><br/>
+<p *myUnless="age>=18">
+  MINEUR . condition "age>=18" is false and myUnless is true.
+</p> <br/>
+
+<p *myUnless="age<18">
+  MAJEUR . condition "age<18"  is false and myUnless is true.
+</p>
+<hr/>
+<div class="avecCadre"  style="width:80%">
+  <span class="cxy avecContour">
+    aa
+  </span><br/>
+  <span class="cxy avecContour">
+    bbbbbbbbbbbbbbb
+  </span><br/>
+  <span class="cxy avecContour">
+    cccccccccccccccccccccccccc
+  </span>
+</div>
+<p>avec directive myMatchSizeOfChilds :</p>
+<div class="avecCadre" myMatchSizeOfChilds="cxy" style="width:80%">
+  <span class="cxy avecContour">
+    aa
+  </span><br/>
+  <span class="cxy avecContour">
+    bbbbbbbbbbbbbbb
+  </span><br/>
+  <span class="cxy avecContour">
+    cccccccccccccccccccccccccc
+  </span>
+</div>

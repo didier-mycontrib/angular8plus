@@ -1,0 +1,12 @@
+<p>my-counter with @ngrx/store</p>
+ 
+<button (click)="onReset()">Reset Counter to 0</button> &nbsp;
+<button (click)="onDecrement()">Decrement (--)</button> &nbsp;
+Current Count:<span [ngClass]="setClasses()"> {{ count_value }}</span> &nbsp;
+<button (click)="onIncrement()">Increment (++)</button>
+<hr/>
+<button (click)="onTogglePub()">TogglePub(On/Off)</button> &nbsp;
+<button (click)="onDisablePub()">Disable (Off)</button> &nbsp;
+Current Pub: <span>{{ pub$ | async }}</span> &nbsp;
+<button (click)="onEnablePub()">Disable (On)</button>
+<p *ngIf="(pub$ | async) == true">pub (advertisement)</p>

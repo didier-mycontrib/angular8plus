@@ -1,0 +1,7 @@
+<p>inside-outside-zone works!</p>
+cpt=<span class="enEvidence">{{cpt}}</span> <input type="button" value="reset to 0" (click)="onResetCpt()" /><br/>
+<input type="button" value="++to10 inside" (click)="onIncrCpt()" /> <br/>
+<input type="button" value="++to10 outside" (click)="onIncrCptOutside()" /> <br/>
+<input type="button" value="++to10 outside with explicit tick" (click)="onIncrCptOutsideWithExplicitTick()" /> <br/>
+<input type="button" value="++to10 outside direct display" (click)="onIncrCptOutsideDirectDisplay()" /> <br/>
+cpt (#e_cpt)=<span #e_cpt class="enEvidence">{{cpt}}</span>

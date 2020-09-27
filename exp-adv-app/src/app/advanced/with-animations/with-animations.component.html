@@ -1,0 +1,53 @@
+<h3>with-animations</h3>
+<tabset>
+    <tab>
+        <ng-template tabHeading>
+            <b>@changeDivSize</b>
+        </ng-template>
+        <input type="checkbox" [(ngModel)]="myToggleValue" />myToggleValue<br/>
+        <hr/>
+        <div [@changeDivSize]="!myToggleValue?'smaller':'normal'">essai animation avec [@xyTrigger]="stateXorY"</div>        
+    </tab>
+    <tab>
+        <ng-template tabHeading>
+            <b>@fadeInOut</b>
+        </ng-template>
+        <input type="radio" name="ulOrTable" [(ngModel)]="ulOrTable" [value]="'ul'" /> ul &nbsp;&nbsp;
+        <input type="radio" name="ulOrTable" [(ngModel)]="ulOrTable" [value]="'table'" /> table <br/>
+        <input type="button" value="add item" (click)="onAddItem()" /> &nbsp;
+        <input type="button" value="remove item" (click)="onRemoveItem()" /><br/>
+        <br/>
+        <ul [style.display]="ulOrTable=='ul'?'block':'none'">
+            <li *ngFor="let item of myList" [@fadeInOut]>
+                {{item}}
+            </li>
+        </ul>
+        <table border="1" [style.display]="ulOrTable=='table'?'block':'none'">
+            <tr *ngFor="let item of myList" [@fadeInOut]>
+                <td>{{item}}</td>
+            </tr>
+        </table>
+    </tab>
+    <tab>
+        <ng-template tabHeading>
+            <b>@enterLeave</b>
+        </ng-template> 
+        <input type="button" value="add item" (click)="onAddItem()" /> &nbsp;
+        <input type="button" value="remove item" (click)="onRemoveItem()" /><br/>
+        <br/>
+        <ul>
+            <li *ngFor="let item of myList" [@enterLeave]="'flyIn'">
+                {{item}}
+            </li>
+        </ul>
+    </tab>
+</tabset>
+<hr/>
+<h3>standard css animations (without angular):</h3>
+<p>surlover le bouton et la zone de texte vont s'animer</p>
+<button>button à survoler à la souris</button>
+<p></p>
+<p id="pWithAnim">texte <span class="enEvidence">à survoler à la souris</span></p>
+<h3>simple transition css (without angular):</h3>
+<div class="avecCadre small-zoom ">blabla qui va bien</div>
+

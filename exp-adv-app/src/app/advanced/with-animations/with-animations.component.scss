@@ -1,0 +1,40 @@
+// Angular animations (trigger) not here 
+//--> src/app/common/animations/xyzTrigger.ts
+
+//Standard (no angular) css animations:
+
+@keyframes monanimation 
+{ 
+  0% { transform: translateX(0px); }
+ 50% { transform: translateX(40px) rotate(-15deg) ;} 
+ 100% { transform: translateX(80px) rotate(15deg); }
+ }
+
+ @keyframes monrebond 
+{ 
+  0% { transform: translateY(0px) translateX(0px);}
+ 50% { transform: translateY(8px) translateX(2px);} 
+ 100% { transform: translateY(0px) translateX(0px); }
+ }
+ .enEvidence { color:red ; font-weight : bold}
+
+button:hover  { color: blue; animation : monrebond 1s;}
+
+#pWithAnim { width: 200px; height: 50px; background-color: #85c4db; /*bleu ciel */    }
+#pWithAnim:hover { background-color: #93db83; /* vert*/; animation: monanimation 2s ; }
+
+//simple transition:
+.small-zoom {
+    transform: scale(0.98);
+    transition: 0.6s;
+  }
+  
+  .small-zoom:hover {
+    transform: scale(1);
+    border-width: 4px;
+    border-style: solid;
+    border-color: red;
+  }
+
+  .avecCadre { display: block; margin : 2px; padding: 2px;
+    border-style: solid; border-color: red; border-width: 1px;}    

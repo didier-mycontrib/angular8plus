@@ -1,0 +1,5 @@
+2020/08/05 11:05:27 [notice] 2004#8068: signal process started
+2020/08/05 11:06:54 [notice] 10500#22204: signal process started
+2020/08/05 11:06:54 [error] 10500#22204: OpenEvent("Global\ngx_stop_27028") failed (2: Le fichier spécifié est introuvable)
+2020/08/05 11:11:14 [notice] 27688#24908: signal process started
+2020/08/05 11:56:19 [notice] 22116#27964: signal process started

@@ -1,0 +1,10 @@
+<p>conversion </p>
+montant : <input [(ngModel)]="montant" /> <br/>
+monnaieSource: <select [(ngModel)]="codeDeviseSrc">
+    <option *ngFor="let d of tabDevises" [ngValue]="d.code">{{ d | json}}</option>
+</select><br/>
+monnaieCible: <select [(ngModel)]="codeDeviseTarget">
+    <option *ngFor="let d of tabDevises" [ngValue]="d.code">{{ d | json}}</option>
+</select><br/>
+<input type="button" value="convertir" (click)="onConvertir()" /> <br/>
+montantConverti = {{montantConverti}}
