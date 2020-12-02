@@ -1,0 +1,27 @@
+Randomized with seed 47886
+Started
+beforeAll called once
+beforeEach called again
+afterEach called again
+FbeforeEach called again
+afterEach called again
+.beforeEach called again
+afterEach called again
+.beforeEach called again
+afterEach called again
+.afterAll called once
+
+
+Failures:
+1) tests structures avec jasmine tests de calcul 1+2=3
+  Message:
+    Expected 3 to be 4.
+  Stack:
+    Error: Expected 3 to be 4.
+        at <Jasmine>
+        at UserContext.<anonymous> (D:\tp\local-git-mycontrib-repositories\tp_angular8+\basic-app\dist\out-tsc\src\app\basicTest.spec.js:20:41)
+        at <Jasmine>
+
+4 specs, 1 failure
+Finished in 0.041 seconds
+Randomized with seed 47886 (jasmine --random=true --seed=47886)

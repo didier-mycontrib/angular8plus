@@ -68,8 +68,8 @@ import { APP_TITLE } from './common/token/global-tokens';
     TabsModule.forRoot()
   ],
   providers: [
-    {provide: APP_TITLE, useValue: 'exp_adv_app' },
-    { provide: MyStringService, useClass: MyStringServiceV1 }
+    {provide: APP_TITLE, useValue: 'adv_app' },
+    //{ provide: MyStringService, useClass: MyStringServiceV1 }
     //{ provide: MyStringService, useClass: MyStringServiceV2 }
   ],
   bootstrap: [AppComponent]
