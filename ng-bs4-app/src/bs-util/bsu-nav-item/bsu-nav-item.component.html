@@ -1,9 +1,9 @@
-    <a *ngIf="menuDef.path && subLevel" [ngClass]="setCssClasses()"
+    <a *ngIf="menuDef.path && _subLevel" [ngClass]="setCssClasses()"
        [routerLink]="[menuDef.path]"
        [routerLinkActive]="'active'" (click)="toggleNavBar()">{{menuDef.label}}
     </a>
 <!-- ou bien -->
-<li *ngIf="menuDef.path && !subLevel"  class="nav-item">
+<li *ngIf="menuDef.path && !_subLevel"  class="nav-item">
     <a [ngClass]="setCssClasses()" [routerLink]="[menuDef.path]" 
       routerLinkActive='active'  (click)="toggleNavBar()" >{{menuDef.label}}
     </a>

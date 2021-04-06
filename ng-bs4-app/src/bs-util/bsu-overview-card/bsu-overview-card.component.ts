@@ -18,7 +18,7 @@ export class BsuOverviewCardComponent implements OnInit {
   bigModalInnerHtmlText : string = "big html";
 
   @Input()
-  footer : string = null; //"default optional card footer text";
+  footer : string | null= null; //"default optional card footer text";
 
   constructor() { }
 

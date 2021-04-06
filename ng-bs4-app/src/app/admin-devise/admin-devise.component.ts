@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DeviseService } from '../common/service/devise.service';
 import { Devise } from '../common/data/devise';
-import { NgForm } from '@angular/forms';
+//import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-devise',
@@ -18,8 +18,8 @@ export class AdminDeviseComponent implements OnInit {
   msgSaveOrUpdate : string =""; //Message secondaire
   msg : string =""; //Message principal exemple : "devise xy deleted"
 
-  @ViewChild('formDevise', { static : false}) 
-  form : NgForm ;
+  //@ViewChild('formDevise', { static : false}) 
+  //form : NgForm ;
 
   public onFormInit(){
 

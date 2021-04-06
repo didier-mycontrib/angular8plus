@@ -9,13 +9,24 @@ import { MenuDefinition } from "src/bs-util/data/MenuDefinition";
 export class BsuNavItemComponent implements OnInit{ 
 
   @Input() //settings passed from grand parent to parent to child component
-  public currentUserRoles : String=null;
+  public currentUserRoles : string | null=null;
 
   @Input()
   menuDef :MenuDefinition = {};
 
+  public _subLevel :boolean = false;
+
   @Input()
-  subLevel :boolean = false;
+  public set subLevel(subLevelAsString:string){
+    this._subLevel= ( subLevelAsString == "true")
+  }
+ 
+  public get subLevel() : string {
+    return this._subLevel.toString();
+  }
+
+
+  
 
   constructor() { }
 
@@ -40,7 +51,7 @@ export class BsuNavItemComponent implements OnInit{
   }
 
   setCssClasses() {
-    if(this.subLevel)
+    if(this._subLevel)
     return {
       'nav-link': false, 
       'dropdown-item' : true,  

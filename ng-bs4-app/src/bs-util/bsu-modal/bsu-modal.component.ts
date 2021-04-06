@@ -10,7 +10,7 @@ import { BsModalService , BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class BsuModalComponent implements OnInit {
 
-  modalRef: BsModalRef;
+  modalRef! : BsModalRef;
 
   @Input()
   title : string ="default modal title";
@@ -25,7 +25,7 @@ export class BsuModalComponent implements OnInit {
     thisContent : any ;
 
     public openThisContext() {
-      let options : object = null;
+      let options : object | null = null;
       //console.log("length="+this.innerHtmlText.length);
       if(this.innerHtmlText && this.innerHtmlText.length > 400){
         options = {  size: 'lg' };
@@ -37,7 +37,7 @@ export class BsuModalComponent implements OnInit {
       this.modalRef=this.modalService.show(this.thisContent , options   );
     }
 
-    open(content) {
+    open(content : any) {
       this.modalRef=this.modalService.show(content);
     }
   

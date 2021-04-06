@@ -12,7 +12,7 @@ export class BsuNavBarComponent implements OnInit  {
   isNavbarCollapsed : boolean = true;
 
   @Input()
-  public currentUserRoles : String=null; //ex: "admin,publisher"
+  public currentUserRoles : string|null=null; //ex: "admin,publisher"
 
   @Input()
   brandTitle : string ="my-app";

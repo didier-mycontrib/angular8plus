@@ -9,12 +9,12 @@ import { MenuDefinition } from "src/bs-util/data/MenuDefinition";
 export class BsuDropdownMenuComponent implements OnInit {
 
   @Input() //settings passed from grand parent to parent to child component
-  public currentUserRoles : String=null;
+  public currentUserRoles : string | null=null;
 
   //toggleM : boolean =false; //for old version without ng-bootstrap
 
   @Input()
-  label : string = "bsu-dropdown-menu"; //default value
+  label : string | null | undefined = "bsu-dropdown-menu"; //default value
 
   @Input()
   dopdownMenuDefs :MenuDefinition[] = [

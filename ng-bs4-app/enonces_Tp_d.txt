@@ -100,7 +100,7 @@ backend nodeJs/express de façon à tout télécharger depuis le même endroit (
     - injecter "DeviseService" dans "AdminDeviseComponent" 
     - ajouter "AdminDeviseComponent" dans les routes de app-routing.module.ts 
       et le menu de header.component .
-    - code (plus ou moins partiellement) un "CRUD" dans "AdminDeviseComponent"
+    - coder (plus ou moins partiellement) un "CRUD" dans "AdminDeviseComponent"
       et tester le tout (NB: on pourra dans un premier temps coder un "delete" qui
       se programme rapidement) .
     - tester avec ou sans sécurité activée, avec ou sans jeton, avec ou sans intercepteur .
