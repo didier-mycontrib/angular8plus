@@ -1,0 +1,111 @@
+import { Component } from '@angular/core';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  title = 'oidc-app';
+
+v1InitForImplicitFlow(){
+     //this.oauthService.issuer="https://steyer-identity-server.azurewebsites.net/identity"; //for https://www.angulararchitects.io/aktuelles/authentication-in-angular-2-with-oauth2-oidc/ tutorial
+    this.oauthService.issuer="http://localhost:8989/auth/realms/myrealm";
+
+    // URL of the SPA to redirect the user to after login
+    //this.oauthService.redirectUri = window.location.origin + "/index.html"; //for tutorial
+    this.oauthService.redirectUri = window.location.origin + "/ngr-loggedIn"; //angular route
+
+    // The SPA's id. The SPA is registerd with this id at the auth-server
+    //this.oauthService.clientId = "spa-demo";  //for tutorial
+    this.oauthService.clientId = "webappclient2";
+    //this.oauthService.dummyClientSecret can just used in password flow (and have not sense in SPA)
+
+    // set the scope for the permissions the client should request
+    // The first three are defined by OIDC. The 4th is a usecase-specific one
+    //this.oauthService.scope = "openid profile email voucher"; //for tutorial
+    this.oauthService.scope = "openid profile resource.read resource.write"; //invalid scope are detected !!!
+
+    // set to true, to receive also an id_token via OpenId Connect (OIDC) in addition to the
+    // OAuth2-based access_token
+    this.oauthService.oidc = true; // ID_Token
+
+    // Use setStorage to use sessionStorage or another implementation of the TS-type Storage
+    // instead of localStorage
+    this.oauthService.setStorage(sessionStorage);
+
+    // Discovery Document of your AuthServer as defined by OIDC
+    //let url = 'https://steyer-identity-server.azurewebsites.net/identity/.well-known/openid-configuration'; //tutorial
+    let url = 'http://localhost:8989/auth/realms/myrealm/.well-known/openid-configuration';
+
+    //this.oauthService.loginUrl , this.oauthService.logoutUrl and this.oauthService.issuer
+    //peuvent à priori être récupérés/déduits de loadDiscoveryDocument
+    //mais en pratique , fixer ces valeurs peut être utile
+
+
+    // Load Discovery Document and then try to login the user
+    this.oauthService.loadDiscoveryDocument(url).then(() => {
+
+      // This method just tries to parse the token(s) within the url when
+      // the auth-server redirects the user back to the web-app
+      // It dosn't send the user the the login page !!!!
+      this.oauthService.tryLogin({
+        onTokenReceived: context => {
+          console.log("logged in");
+          console.log("loggedIn context=" + JSON.stringify(context));
+          //plein d'informations: idToken + accessToken + username , email , ...
+      }
+      /*,
+      validationHandler: context => {
+          var search = new URLSearchParams();
+          search.set('token', context.idToken); 
+          search.set('client_id', oauthService.clientId);
+          return http.get(validationUrl, { search}).toPromise();
+      }*/
+      });
+    });
+
+  }
+
+
+  //https://datatracker.ietf.org/doc/html/rfc7636 (PKCE)
+  
+  v2InitForCodeFlow(){
+    const authCodeFlowConfig: AuthConfig = {
+      // Url of the Identity Provider
+      issuer: 'http://localhost:8989/auth/realms/myrealm',
+  
+      // URL of the SPA to redirect the user to after login
+      //redirectUri: window.location.origin + '/index.html',
+      redirectUri: window.location.origin + "/ngr-loggedIn",
+  
+      // The SPA's id. The SPA is registered with this id at the auth-server
+      // clientId: 'server.code',
+      clientId: 'webappclient2',
+      //clientSecret if necessary (not very useful for web SPA)
+      dummyClientSecret: 'ee3f886b-0b4d-4529-9d0c-e61ca4b91d96',
+      responseType: 'code',
+  
+      // set the scope for the permissions the client should request
+      // The first four are defined by OIDC.
+      // Important: Request offline_access to get a refresh token
+      // The api scope is a usecase specific one
+      scope: 'openid profile resource.read resource.write',
+  
+      showDebugInformation: true,
+    };
+    this.oauthService.configure(authCodeFlowConfig);
+    this.oauthService.oidc = true; // ID_Token
+
+    this.oauthService.setStorage(sessionStorage);
+    
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+  }
+
+  constructor(private oauthService: OAuthService) {
+      //this.v1InitForImplicitFlow();
+      this.v2InitForCodeFlow();
+  }
+
+}
