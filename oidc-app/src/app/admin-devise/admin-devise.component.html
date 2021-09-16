@@ -1,6 +1,24 @@
-<p>admin-devise</p>
-codeDevise : <input [(ngModel)]="codeDevise" /> <br/>
-<input type="button" value="supprimer" (click)="onSupprimer()" /> <br/>
+<h1>admin-devise (version basique)</h1>
+code : <input [(ngModel)]="devise.code" /> <br/>
+name : <input [(ngModel)]="devise.name" /> <br/>
+change : <input [(ngModel)]="devise.change" /> <br/>
+<input type="button" value="ajouter" (click)="onAjouter()" />
+ <br/>
+<hr/>
 {{message}}
+<hr/>
+NB: l'action "supprimer" nécessite le scope resource.delete <br/>
+et  l'action "ajouter" nécessite le scope resource.write
+<hr/>
+<table border="1">
+   <tr><th>action</th><th>code</th><th>name</th><th>change</th></tr> 
+   <tr *ngFor="let d of devises">
+       <td><input type="button" value="supprimer" (click)="onSupprimer(d.code)" /></td>
+       <td>{{d.code}}</td>
+       <td>{{d.name}}</td>
+       <td>{{d.change}}</td>
+    </tr>
+</table>
+
 
 

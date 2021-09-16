@@ -1,5 +1,5 @@
 export class Devise{
-    constructor(public code:string="?",
-                public name:string="?",
-                public change:number=1){}
+    constructor(public code:string="MXY",
+                public name:string="MonnaieXy",
+                public change:number=1.01){}
 }

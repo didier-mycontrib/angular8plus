@@ -14,14 +14,18 @@ export class MyAuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler)
   :Observable<HttpEvent<unknown>> {
-//récupération du jeton:             
-let token = sessionStorage.getItem('access_token');
+    //récupération du jeton:             
+    let access_token = sessionStorage.getItem('access_token');
 
-//ajout du jeton dans le champ Authorization 
-//de l'entête de la requête HTTP enrichie
-//selon les spécifications "Bearer token" du protocole HTTP :
-const authReq = request.clone({headers: 
-       request.headers.set('Authorization', 'Bearer ' + token)});
-return next.handle(authReq);
-}
+    if(access_token){
+      //ajout du jeton dans le champ Authorization 
+      //de l'entête de la requête HTTP enrichie
+      //selon les spécifications "Bearer token" du protocole HTTP :
+      const authReq = request.clone({headers: 
+            request.headers.set('Authorization', 'Bearer ' + access_token)}
+            );
+      return next.handle(authReq);
+    }
+    else return next.handle(request);
+    }
 }

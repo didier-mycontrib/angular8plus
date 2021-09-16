@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthConfig, OAuthErrorEvent, OAuthInfoEvent, OAuthService, OAuthSuccessEvent } from 'angular-oauth2-oidc';
+import { IData } from '../data/data';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +9,11 @@ import { AuthConfig, OAuthErrorEvent, OAuthInfoEvent, OAuthService, OAuthSuccess
 export class SessionService {
 
   authenticated : boolean = false;
-  roles : string[]= [];
+  grantedScopes : string[]= [];
   username : string = "?";
-  data : object = { p1: "abc" , p2 : "def"  };
+  data : IData = { p1: "abc" , p2 : "def"  };
 
-  constructor(private oauthService: OAuthService) { 
+  constructor(private oauthService: OAuthService , private router : Router) { 
         this.initOAuthServiceForCodeFlow();
   }
 
@@ -22,6 +24,12 @@ export class SessionService {
   
       // URL of the SPA to redirect the user to after login
       redirectUri: window.location.origin + "/ngr-loggedIn",
+
+      silentRefreshRedirectUri: window.location.origin + "/silent-refresh.html",
+      useSilentRefresh: true,
+      
+      postLogoutRedirectUri : window.location.origin + "/ngr-logInOut", 
+      //ou /ngr-welcome ou ...
   
       // The SPA's id. The SPA is registered with this id at the auth-server
       // clientId: 'server.code',
@@ -34,7 +42,7 @@ export class SessionService {
       // The first four are defined by OIDC.
       // Important: Request offline_access to get a refresh token
       // The api scope is a usecase specific one
-      scope: 'openid profile resource.read resource.write',
+      scope: 'openid profile resource.read resource.write resource.delete',
   
       showDebugInformation: true,
     };
@@ -69,25 +77,48 @@ export class SessionService {
     if(event.type=="token_received" ){
       console.log("***** token_received ****")
       this.authenticated = true;
+      let grantedScopesObj : object = this.oauthService.getGrantedScopes();
+      this.grantedScopes =<any> grantedScopesObj;
+      console.log("grantedScopes="+JSON.stringify(this.grantedScopes));
+
       var claims : any = this.oauthService.getIdentityClaims();
       console.log("claims="+JSON.stringify(claims))
       if (claims) this.username= claims.preferred_username + "("+ claims.name + ")";
+      
+      /*
+      //not necessary with popup and silent-refresh
+      let savedData = sessionStorage.getItem("data");
+      if(savedData){
+        this.data = JSON.parse(savedData)
+      }
+      */
+     if(this.oauthService.silentRefreshRedirectUri != null){
+       this.router.navigateByUrl("/ngr-loggedIn");
+     }
     }
   }
 
 
   delegateOidcLogin(){
+      /*
+      //not necessary with popup and silent-refresh:
+      sessionStorage.setItem("data",JSON.stringify(this.data)) //store session data before redirect and lost
+     */
+
       //this.oauthService.initImplicitFlow(); //Attention: possible que si configuré par le serveur OAuth2/OIDC .
       //this.oauthService.initCodeFlow(); //c'est mieux
 
-      this.oauthService.initLoginFlow(); //appel en interne
+      //this.oauthService.initLoginFlow(); //appel en interne
       //.initImplicitFlow(); ou .initCodeFlow(); 
       //selon la configuration préalablement enregistrée.
+
+      this.oauthService.initLoginFlowInPopup();
   }
 
   oidcLogout(){
-       //this.oauthService.logOut();
-       this.oauthService.revokeTokenAndLogout();
+       //this.oauthService....
+       this.oauthService.logOut(); //clear tokens in storage and redirect to logOutEndpoint
+       //this.oauthService.revokeTokenAndLogout(); //warning : problems if no CORS settings !!!!
   }
 
  

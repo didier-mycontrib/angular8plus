@@ -8,9 +8,10 @@ import { SessionService } from '../common/service/session.service';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public sessionService : SessionService) { }
 
   ngOnInit(): void {
+    this.sessionService.data.p1="p1_init";
   }
 
 }

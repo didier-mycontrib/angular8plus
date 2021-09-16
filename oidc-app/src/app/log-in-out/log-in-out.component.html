@@ -1,9 +1,14 @@
-<hr/>
 LogInOut COMPONENT<br/>
 <p>
     <button (click)="login()" class="btn btn-default">Login</button>
     <button (click)="logout()" class="btn btn-default">Logout</button>
 </p>    
-<p>
-    exemple of good Username/Password: user/pwd1
-</p>
+<div>
+ <p>exemples of good Username/Password:</p>
+   <ul>
+      <li>user1/pwd1 (MANAGE_RW : resource.read , resource.write )</li> 
+      <li>admin1/pwd1 (ADMIN_CRUD : resource.read , resource.write , resource.delete )</li> 
+      <li>admin2/pwd2 (ADMIN_CRUD : resource.read , resource.write , resource.delete )</li> 
+   </ul>
+   
+</div>

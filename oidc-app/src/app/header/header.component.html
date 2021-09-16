@@ -1,5 +1,10 @@
-<p>username: <b>{{sessionService.username}}</b> authenticated : <b>{{sessionService.authenticated}}</b> </p>
+<p> p1: <b>{{sessionService.data.p1}}</b>
+    username: <b>{{sessionService.username}}</b>
+    authenticated : <b>{{sessionService.authenticated}}</b>
+    grantedScopes : <b>{{sessionService.grantedScopes}}</b>
+ </p>
 
 <a routerLink="/ngr-welcome">welcome</a> &nbsp;&nbsp;&nbsp;
- <a routerLink="/ngr-login">login</a>
+ <a routerLink="/ngr-logInOut">logInOut</a>&nbsp;&nbsp;&nbsp;
+ <a routerLink="/ngr-admin-devise">admin-devise (after login)</a>
 <hr/>

@@ -8,7 +8,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
   { path: 'ngr-welcome', component: WelcomeComponent },
-  { path: 'ngr-login', component: LogInOutComponent },
+  { path: 'ngr-logInOut', component: LogInOutComponent },
   { path: 'ngr-loggedIn', component: SuiteAuthComponent },
   { path: 'ngr-devise', component: DeviseComponent },
   { path: 'ngr-admin-devise', component: AdminDeviseComponent },
