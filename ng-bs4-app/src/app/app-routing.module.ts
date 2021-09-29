@@ -25,32 +25,33 @@ import { NewsResolver } from './common/resolver/new.resolver';
 
 
 const routes: Routes = [
-
+/*
 { path: 'asidePanelA', component: AsidePanelAComponent , outlet : 'aside'},
 { path: 'asidePanelB', component: AsidePanelBComponent , outlet : 'aside'},    
- 
-{ path: 'ngr/welcome', component: WelcomeComponent },
-{ path: '', redirectTo: '/ngr/welcome(aside:asidePanelA)', pathMatch: 'full'},
-{ path: 'ngr/basic', component: BasicComponent } ,
-{ path: 'ngr/news', component: NewsComponent , resolve: { publications: NewsResolver }} ,
-{ path: 'ngr/stats', component: StatsComponent , canActivate: [CanActivateAdminRouteGuard] } ,
-{ path: 'ngr/browse-products', component: BrowseProductsComponent ,
+ */
+{ path: 'ngr-welcome', component: WelcomeComponent },
+/*{ path: '', redirectTo: '/ngr-welcome(aside:asidePanelA)', pathMatch: 'full'},*/
+{ path: '', redirectTo: '/ngr-welcome', pathMatch: 'full'},
+{ path: 'ngr-basic', component: BasicComponent } ,
+{ path: 'ngr-news', component: NewsComponent , resolve: { publications: NewsResolver }} ,
+{ path: 'ngr-stats', component: StatsComponent , canActivate: [CanActivateAdminRouteGuard] } ,
+{ path: 'ngr-browse-products', component: BrowseProductsComponent ,
 children: [
   { path: 'prodList/:category', component: ProductsComponent },
   { path: 'prod-details/:id', component: ProductDetailsComponent },
   { path: '', redirectTo: 'prodList/divers', pathMatch: 'prefix'}
   ] } ,
-{ path: 'ngr/with-animations', component: WithAnimationsComponent } ,
-{ path: 'ngr/with-traductions', component:WithTraductionComponent} ,
-{ path: 'ngr/with-injections', component:WithInjectionComponent} ,
-{ path: 'ngr/chat', component: ChatComponent } ,
-{ path: 'ngr/admin-prod-idb', component: AdminProdIdbComponent } ,
-{ path: 'ngr/security', component: AdminSecurityComponent } ,
-{ path: 'ngr/login', component: LoginComponent  } ,
-{ path: 'ngr/not-authorized', component: NotAuthorizedComponent } ,
-{ path: 'ngr/admin-news', component: AdminNewsComponent , canActivate: [CanActivatePublisherRouteGuard] } ,
-{ path: 'ngr/admin-devise' , component: AdminDeviseComponent, canActivate: [CanActivateAdminRouteGuard]  },
-{ path: '**' ,redirectTo: 'ngr/welcome', pathMatch: 'full'}
+{ path: 'ngr-with-animations', component: WithAnimationsComponent } ,
+{ path: 'ngr-with-traductions', component:WithTraductionComponent} ,
+{ path: 'ngr-with-injections', component:WithInjectionComponent} ,
+{ path: 'ngr-chat', component: ChatComponent } ,
+{ path: 'ngr-admin-prod-idb', component: AdminProdIdbComponent } ,
+{ path: 'ngr-security', component: AdminSecurityComponent } ,
+{ path: 'ngr-login', component: LoginComponent  } ,
+{ path: 'ngr-not-authorized', component: NotAuthorizedComponent } ,
+{ path: 'ngr-admin-news', component: AdminNewsComponent , canActivate: [CanActivatePublisherRouteGuard] } ,
+{ path: 'ngr-admin-devise' , component: AdminDeviseComponent, canActivate: [CanActivateAdminRouteGuard]  },
+{ path: '**' ,redirectTo: 'ngr-welcome', pathMatch: 'full'}
 ];
 
 @NgModule({

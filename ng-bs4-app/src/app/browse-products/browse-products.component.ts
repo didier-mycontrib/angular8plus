@@ -17,7 +17,7 @@ export class BrowseProductsComponent implements OnInit {
 
   onNavigateByCategory(category:string):void {
     this.selectedCategory=category;
-    let link = ['/ngr/browse-products/prodList', this.selectedCategory];
+    let link = ['/ngr-browse-products/prodList', this.selectedCategory];
     console.log("selectedCategorie="+this.selectedCategory);
     this.router.navigate(link);
     }

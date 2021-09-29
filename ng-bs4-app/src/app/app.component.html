@@ -4,10 +4,14 @@
   <app-header [title]="title" class="sticky-top"></app-header>
  <div class="container my-content">
   <div class="row">
+     <!-- secondary outlet with name -->
+     <!--
      <div class="col-sm-1">
-         <router-outlet name="aside"></router-outlet> <!-- secondary outlet with name -->
+         <router-outlet name="aside"></router-outlet> 
       </div>
       <div class="col-sm-11">
+      -->
+      <div class="col-sm-12">
           <router-outlet></router-outlet> 
           <!-- main outlet without specified name , default_name="primary" -->
       </div>

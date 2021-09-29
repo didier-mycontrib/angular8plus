@@ -13,30 +13,30 @@ export class HeaderComponent implements OnInit {
   title : string ="myApp" //as default value
 
   myMenuDefs :MenuDefinition[] = [
-    { label : "basic" , path : 'ngr/basic' },
-    { label : "news" , path : "ngr/news" },
-    { label : "browse-products" , path : "ngr/browse-products" },
+    { label : "basic" , path : 'ngr-basic' },
+    { label : "news" , path : "ngr-news" },
+    { label : "browse-products" , path : "ngr-browse-products" },
     { label : "admin" , 
       children : [
-        { label : "set security" , path : "ngr/security" } ,
+        { label : "set security" , path : "ngr-security" } ,
         { divider : true },
-        { label : "login" , path : "ngr/login" } ,
+        { label : "login" , path : "ngr-login" } ,
         { divider : true },
-        { label : "admin-news (publisher)" , path : "ngr/admin-news" , role : "admin"} ,
+        { label : "admin-news (publisher)" , path : "ngr-admin-news" , role : "admin"} ,
         { divider : true },
-        { label : "devise (admin)" , path : "ngr/admin-devise" , role : "admin"},
-        { label : "stats (admin)" , path : "ngr/stats" }
+        { label : "devise (admin)" , path : "ngr-admin-devise" , role : "admin"},
+        { label : "stats (admin)" , path : "ngr-stats" }
       ]
     } ,
     { label : "advanced" , 
       children : [
-        { label : "animations" , path : "ngr/with-animations" },
-        { label : "traductions" , path : "ngr/with-traductions" },
-        { label : "injections" , path : "ngr/with-injections" },
+        { label : "animations" , path : "ngr-with-animations" },
+        { label : "traductions" , path : "ngr-with-traductions" },
+        { label : "injections" , path : "ngr-with-injections" },
         { divider : true },
-        { label : "admin-prod (indexedDB)" , path : "ngr/admin-prod-idb" },
+        { label : "admin-prod (indexedDB)" , path : "ngr-admin-prod-idb" },
         { divider : true },
-        { label : "chat" , path : "ngr/chat" }
+        { label : "chat" , path : "ngr-chat" }
       ]
     }];
 
