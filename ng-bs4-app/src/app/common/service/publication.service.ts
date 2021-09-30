@@ -8,13 +8,13 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PublicationService {
-  private _publicationPublicBaseUrl = "./news-api/public/publication" ; //avec ng serve --proxy-config proxy.conf.json
-  private _publicationPrivateBaseUrl = "./news-api/private/role_publisher/publication" ; //avec ng serve --proxy-config proxy.conf.json
+  private _publicationPublicBaseUrl = "/news-api/public/publication" ; //avec ng serve --proxy-config proxy.conf.json
+  private _publicationPrivateBaseUrl = "/news-api/private/role_publisher/publication" ; //avec ng serve --proxy-config proxy.conf.json
   
   constructor(private _http : HttpClient) { }
 
   public uploadPublicationFormaDataObservable(publicationFormData : FormData):Observable<Publication> {
-    let uploadPublicationUrl : string = "./news-api/private/role_publisher/upload_publication";
+    let uploadPublicationUrl : string = "/news-api/private/role_publisher/upload_publication";
     return this._http.post<Publication>(uploadPublicationUrl ,publicationFormData );
     }
 

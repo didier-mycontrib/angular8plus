@@ -20,7 +20,7 @@ export class AuthService {
 
   constructor(private _http : HttpClient) { }
   private _headers = new HttpHeaders({'Content-Type': 'application/json'});
-  private _authBaseUrl = "./login-api/public/auth" ; //avec ng serve --proxy-config proxy.conf.json
+  private _authBaseUrl = "/login-api/public/auth" ; //avec ng serve --proxy-config proxy.conf.json
 
   postAuth(auth : AuthRequest):Observable<AuthResponse>{
     return this._http.post<AuthResponse>(this._authBaseUrl ,auth,{headers: this._headers} )
@@ -32,7 +32,7 @@ export class AuthService {
 
   
   getSecureMode():Observable<SecureModeDto>{
-    let getSecureModeUrl = "./auth-api/public/dev-only/get-secure-mode";
+    let getSecureModeUrl = "/auth-api/public/dev-only/get-secure-mode";
     return this._http.get<SecureModeDto>(getSecureModeUrl)
     .pipe(
       //tap( other async task without transforming result)
@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   setSecureMode(newSecureMode : boolean):Observable<SecureModeDto>{
-    let setSecureModeUrl = "./auth-api/public/dev-only/set-secure-mode/"+newSecureMode;
+    let setSecureModeUrl = "/auth-api/public/dev-only/set-secure-mode/"+newSecureMode;
     //EXCEPTIONNELLEMENT: SETTING NEW VALUE via GET (DEV-ONLY) !!!!
     return this._http.get<SecureModeDto>(setSecureModeUrl)
     .pipe(

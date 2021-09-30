@@ -10,13 +10,13 @@ import { Devise } from '../data/devise';
 export class DeviseService {
 
   //avec ng serve --proxy-config proxy.conf.json
-  private basePublicUrl = "./devise-api/public/devise";
-  private basePrivateUrl = "./devise-api/private/role_admin/devise";
+  private basePublicUrl = "/devise-api/public/devise";
+  private basePrivateUrl = "/devise-api/private/role_admin/devise";
   private _headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   public convertir( montant  : number,  source :string ,   cible : string) : Observable<ResConv> {
     let convertirUrl : string = null;
-    convertirUrl = "./devise-api/public/convert?amount="+montant
+    convertirUrl = "/devise-api/public/convert?amount="+montant
                    +"&source="+source+"&target=" + cible ;
     console.log( "convertirUrl = " + convertirUrl);
     return this.http.get<ResConv>(convertirUrl );
@@ -45,7 +45,7 @@ export class DeviseService {
   }
 /*
   public initDevises() : Observable<Devise[]> {
-    let initDeviseUrl  ="./devise-api/public/init-devises";
+    let initDeviseUrl  ="/devise-api/public/init-devises";
     console.log( "initDeviseUrl = " + initDeviseUrl);
     return this.http.get<Devise[]>(initDeviseUrl );
   }
