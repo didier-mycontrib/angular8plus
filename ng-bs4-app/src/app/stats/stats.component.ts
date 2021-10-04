@@ -32,12 +32,15 @@ export class StatsComponent implements OnInit {
 
   onTestData(){
     this.chartData = [{ data: [ ], 
-                       label: 'x'},
+                       label: 'a'} /*,
                        { data: [ ], 
-                        label: 'y'}
+                        label: 'b'}*/
                       ];
     this.chartData[0].data= [ 10 , 90 , 30];
-    this.chartData[1].data= [ 5 , 80 , 60];
+    //this.chartData[1].data= [ 5 , 80 , 60];
+    this.chartType = "bar";
+    this.chartLabels = ["janvier"  , "fevrier" , "mars" ];
+
   }
 
   initChartDataFromStats(){
