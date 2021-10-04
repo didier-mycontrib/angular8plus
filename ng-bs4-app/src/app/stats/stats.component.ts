@@ -29,6 +29,17 @@ export class StatsComponent implements OnInit {
   }
   };
 
+
+  onTestData(){
+    this.chartData = [{ data: [ ], 
+                       label: 'x'},
+                       { data: [ ], 
+                        label: 'y'}
+                      ];
+    this.chartData[0].data= [ 10 , 90 , 30];
+    this.chartData[1].data= [ 5 , 80 , 60];
+  }
+
   initChartDataFromStats(){
     let freshData = [];
     for(let s of this.stats){
