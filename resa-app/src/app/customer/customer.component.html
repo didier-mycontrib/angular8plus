@@ -1,0 +1,94 @@
+<h3>customer account ({{(customerId==null)?'not identified':'identified'}})</h3>
+
+<div *ngIf="customerId==null">
+    <input type="button" value="login with existing account" 
+           (click)="onSelectMode('existingAccount')" [class.selected]="mode=='existingAccount'" /> or
+    <input type="button" value="create new account" (click)="onSelectMode('newAccount')"[class.selected]="mode=='newAccount'" /> <br/>
+    <form #formLogin="ngForm" *ngIf="mode=='existingAccount'">
+    <fieldset class="c-fieldset">
+        <legend class="c-legend">account (login)</legend>
+        <bsu-my-fg-label label="username">
+            <input type="text" class="form-control" required pattern="[a-zA-Z].+"
+                   name="username" [(ngModel)]="customerAccount.username" /> 
+        </bsu-my-fg-label> 
+        <bsu-my-fg-label label="password">
+            <input type="text" class="form-control" required minlength="3"
+                   name="password" [(ngModel)]="customerAccount.password" /> 
+        </bsu-my-fg-label> 
+        <bsu-my-fg-label label="action">
+            <input  type="button" class="btn bg-primary text-white" 
+                    [disabled]="!formLogin.form.valid" value="login" 
+                    (click)="onLogin()" /> 
+        </bsu-my-fg-label> 
+    </fieldset>
+    </form>
+    <form #formNewAccount="ngForm" *ngIf="mode=='newAccount'">
+        <fieldset class="c-fieldset">
+            <legend class="c-legend">account (for login)</legend>
+            <bsu-my-fg-label label="username (id)">
+                <input type="text" class="form-control" required pattern="[a-zA-Z].+"
+                    name="username" [(ngModel)]="customerAccount.username" /> 
+            </bsu-my-fg-label> 
+            <bsu-my-fg-label label="password">
+                <input type="text" class="form-control" required minlength="3"
+                    name="password" [(ngModel)]="customerAccount.password" /> 
+            </bsu-my-fg-label>
+        </fieldset>
+        <fieldset class="c-fieldset">
+            <legend class="c-legend">customer</legend>
+            <bsu-my-fg-label label="firstName">
+                <input type="text" class="form-control" required pattern="[a-zA-Z].+"
+                    name="firstName" [(ngModel)]="customer.firstName" /> 
+            </bsu-my-fg-label>
+            <bsu-my-fg-label label="lastName">
+                <input type="text" class="form-control" required pattern="[a-zA-Z].+"
+                    name="lastName" [(ngModel)]="customer.lastName" /> 
+            </bsu-my-fg-label> 
+            <bsu-my-fg-label label="birthDay">
+                <input type="text" class="form-control" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+                      placeholder="yyyy-MM-dd (ex: 1990-12-31)"
+                      name="birthDay" [(ngModel)]="customer.birthDay" /> 
+            </bsu-my-fg-label>
+            <bsu-my-fg-label label="email">
+                <input type="text" class="form-control" required minlength="6"
+                    name="email" [(ngModel)]="customer.email" /> 
+            </bsu-my-fg-label>
+            <bsu-my-fg-label label="mobilePhoneNumber">
+                <input type="text" class="form-control" required minlength="10"
+                    name="mobilePhoneNumber" [(ngModel)]="customer.mobilePhoneNumber" /> 
+            </bsu-my-fg-label>
+        </fieldset>
+        <fieldset class="c-fieldset">
+            <legend class="c-legend">address</legend>
+            <bsu-my-fg-label label="num">
+                <input type="text" class="form-control" required
+                    name="num" [(ngModel)]="customer.address.num" /> 
+            </bsu-my-fg-label> 
+            <bsu-my-fg-label label="street">
+                <input type="text" class="form-control" required
+                    name="street" [(ngModel)]="customer.address.street" /> 
+            </bsu-my-fg-label>
+            <bsu-my-fg-label label="zipCode">
+                <input type="text" class="form-control" required
+                    name="zipCode" [(ngModel)]="customer.address.zipCode" /> 
+            </bsu-my-fg-label>
+            <bsu-my-fg-label label="town">
+                <input type="text" class="form-control" required
+                    name="town" [(ngModel)]="customer.address.town" /> 
+            </bsu-my-fg-label>
+            <bsu-my-fg-label label="country">
+                <input type="text" class="form-control" required
+                    name="country" [(ngModel)]="customer.address.country" /> 
+            </bsu-my-fg-label>   
+        </fieldset>
+        <bsu-my-fg-label label="action">
+            <input  type="button" class="btn bg-primary text-white" 
+                    [disabled]="!formNewAccount.form.valid" value="Create New Customer Account" 
+                    (click)="onNewAccount()" /> 
+        </bsu-my-fg-label>
+    </form>
+</div>
+
+<div *ngIf="customerId!=null">
+    customerId={{customerId}}
+</div>

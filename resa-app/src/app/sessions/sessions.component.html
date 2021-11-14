@@ -1,0 +1,17 @@
+<h2>sessions</h2>
+
+<table border="1">
+  <tr>
+    <th>id</th>
+    <th>title</th><th>date</th><th>startTime</th>
+    <th>unitPrice</th><th>description</th><!--<th>maxNbPlaces</th>-->
+  </tr>
+  <tr *ngFor="let s of listeSessions"
+      [class.selected]="selectedSessionId==s.id">
+      <!--<td>{{s.id}}</td>-->
+      <td><input type="button" value="select/deselect" 
+                 (click)="onSelectOnOffSession(s.id)" alt="{{s.id}}"/></td>
+      <td>{{s.title}}</td><td>{{s.date}}</td><td>{{s.startTime}}</td>
+      <td>{{s.unitPrice}}</td><td>{{s.description}}</td><!--<td>{{s.maxNbPlaces}}</td>-->
+    </tr>
+</table>

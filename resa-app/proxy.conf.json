@@ -1,0 +1,7 @@
+{ "/session-api" : { "secure" : "false" ,
+    "target" : "http://localhost:8230" } ,
+  "/customer-api" : { "secure" : "false" ,
+      "target" : "http://localhost:8231" } ,  
+  "/reservation-api" : { "secure" : "false" ,
+        "target" : "http://localhost:8232" }  
+}

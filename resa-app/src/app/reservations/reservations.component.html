@@ -1,0 +1,20 @@
+<form #formResa="ngForm">
+    <fieldset class="c-fieldset">
+        <legend class="c-legend">reservation</legend>
+        <bsu-my-fg-label label="customer">
+            <span>....</span> 
+        </bsu-my-fg-label> 
+        <bsu-my-fg-label label="session">
+            <span>....</span> 
+        </bsu-my-fg-label>
+        <bsu-my-fg-label label="nbPlaces">
+            <input type="text" class="form-control" required minlength="3"
+                   name="nbPlaces" [(ngModel)]="reservation.nbPlaces" /> 
+        </bsu-my-fg-label> 
+        <bsu-my-fg-label label="action">
+            <input  type="button" class="btn bg-primary text-white" 
+                    [disabled]="!formResa.form.valid" value="make reservation" 
+                    (click)="onResa()" /> 
+        </bsu-my-fg-label> 
+    </fieldset>
+</form>

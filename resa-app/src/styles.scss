@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "~ngx-bootstrap/datepicker/bs-datepicker";
+
+
+.ng-valid[required] {
+    border-left: 5px solid #42A948; 
+    }
+   
+input.ng-invalid , textarea.ng-invalid {
+    border-left: 5px solid #a94442; 
+    }
