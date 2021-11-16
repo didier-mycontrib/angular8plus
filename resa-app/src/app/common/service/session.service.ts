@@ -15,7 +15,7 @@ export class SessionService {
   constructor(private _http : HttpClient){}
 
   public getAllSessions$() : Observable<Session[]>{
-    let url = this._apiBaseUrl + "/public/session" ;
+    let url = this._apiBaseUrl + "/public-session" ;
     console.log( "url = " + url);
     return this._http.get<Session[]>(url);
   }

@@ -13,7 +13,7 @@ private _apiBaseUrl ="/reservation-api"; //with ng serve --proxy-config proxy.co
 constructor(private _http : HttpClient){}
 
 public getReservationById$(idResa:string) : Observable<Reservation>{
-  let url = this._apiBaseUrl + "/public/reservation/"+idResa ;
+  let url = this._apiBaseUrl + "/reservation/"+idResa ;
   console.log( "url = " + url);
   return this._http.get<Reservation>(url);
 }

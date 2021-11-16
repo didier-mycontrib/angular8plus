@@ -1,4 +1,5 @@
 <h3>customer account ({{(customerId==null)?'not identified':'identified'}})</h3>
+<span [ngClass]="lastStatusClasses()">{{message}}</span>
 
 <div *ngIf="customerId==null">
     <input type="button" value="login with existing account" 
@@ -89,6 +90,9 @@
     </form>
 </div>
 
+<span [ngClass]="lastStatusClasses()">{{message}}</span>
+
 <div *ngIf="customerId!=null">
-    customerId={{customerId}}
+    customerId={{customerId}} <br/>
+    {{customer | json}}
 </div>

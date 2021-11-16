@@ -14,13 +14,19 @@ export class CustomerService {
   constructor(private _http : HttpClient){}
 
   public getCustomerById$(idCustomer:string) : Observable<Customer>{
-    let url = this._apiBaseUrl + "/private/authorized/customer/"+idCustomer ;
+    let url = this._apiBaseUrl + "/customer/"+idCustomer ;
     console.log( "url = " + url);
     return this._http.get<Customer>(url);
   }
 
+  public getCustomerByUsername$(username:string) : Observable<Customer[]>{
+    let url = this._apiBaseUrl + "/customer?username="+username ;
+    console.log( "url = " + url);
+    return this._http.get<Customer[]>(url);
+  }
+
   public postNewCustomer$(customer: Customer): Observable<Customer>{
-    let url = this._apiBaseUrl +"/public/customer";
+    let url = this._apiBaseUrl +"/public-customer";
     return this._http.post<Customer>(url,customer, {headers: this._headers} )
   }
 }
