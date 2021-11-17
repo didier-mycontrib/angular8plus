@@ -21,6 +21,7 @@
                     [disabled]="!formLogin.form.valid" value="login" 
                     (click)="onLogin()" /> 
         </bsu-my-fg-label> 
+       <p><i>exemples: (alexTherieur,pwd1),(jeanBon,pwd2),...</i></p> 
     </fieldset>
     </form>
     <form #formNewAccount="ngForm" *ngIf="mode=='newAccount'">
@@ -94,5 +95,6 @@
 
 <div *ngIf="customerId!=null">
     customerId={{customerId}} <br/>
-    {{customer | json}}
+    {{customer | json}} <br/>
+    <button (click)="onLogout()">logout</button>
 </div>

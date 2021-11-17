@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer, CustomerAccount, ResLogin } from '../common/data/customer';
+import { extractErrorMessage } from '../common/data/error';
 import { AccountService } from '../common/service/account.service';
 import { CustomerService } from '../common/service/customer.service';
 import { UserSessionService } from '../common/service/user-session.service';
@@ -30,6 +31,15 @@ export class CustomerComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if(this.customerId){
+      this._customerService.getCustomerById$(this.customerId)
+              .subscribe((customer)=>{
+                             this.customer = customer;
+                           },
+                          (err)=>{console.log(err);
+                            this.message = "cannot retreive customer from id : " + extractErrorMessage(err) }
+                  )
+    }
   }
 
   onLogin(){
@@ -43,7 +53,7 @@ export class CustomerComponent implements OnInit {
                      },
                     (err)=>{console.log(err);
                             this.lastStatus="fail";
-                            this.message = "login fail " + err})
+                            this.message = "login fail : " + extractErrorMessage(err)})
     
   }
 
@@ -53,10 +63,19 @@ export class CustomerComponent implements OnInit {
               .subscribe((customers)=>{
                              this.customer = customers[0];
                              this.customerId = this.customer.id;
+                             this._userSessionService.setCustomerId(this.customerId);
                            },
                           (err)=>{console.log(err);
-                            this.message = "cannot retreive customer" }
+                            this.message = "cannot retreive customer from username : " + extractErrorMessage(err) }
                   )
+  }
+
+  onLogout(){
+    this.lastStatus="success"; this.message="logout/disconnected"
+    this.customerId = null;
+    this._userSessionService.setCustomerId(this.customerId);
+    this.customer = new Customer();
+    this.customerAccount = new CustomerAccount();
   }
 
   onNewAccount(){
@@ -70,7 +89,7 @@ export class CustomerComponent implements OnInit {
                            },
                           (err)=>{console.log(err);
                                   this.lastStatus="fail";
-                                  this.message = "cannot save new account"})
+                                  this.message = "cannot save new account : " + + extractErrorMessage(err)})
           
   }
 
@@ -79,10 +98,11 @@ export class CustomerComponent implements OnInit {
     this.customer.username=username;
     this._customerService.postNewCustomer$(this.customer)
               .subscribe((savedCustomer)=>{
-                             this.message = "new customer successfuly saved" 
+                             this.message = "new customer successfuly saved , ready for login" ;
+                             this.mode ="existingAccount"; //pour inviter a se loger
                            },
                           (err)=>{console.log(err);
-                            this.message = "cannot save new customer" }
+                            this.message = "cannot save new customer : " + extractErrorMessage(err) }
                   )
   }
 

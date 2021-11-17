@@ -9,11 +9,15 @@ import { UserSessionService } from '../common/service/user-session.service';
   styleUrls: ['./reservations.component.scss']
 })
 export class ReservationsComponent implements OnInit {
-
+  customerId :string|null=null;
+  selectedSessionId :string|null=null;
   reservation : Reservation = new Reservation();
 
   constructor(private _userSessionService :UserSessionService,
-              private _reservationService :ReservationService) { }
+              private _reservationService :ReservationService) { 
+                this.customerId = this._userSessionService.bsCustomerId$.value;
+                this.selectedSessionId = this._userSessionService.bsSelectedSessionId$.value;
+              }
 
   ngOnInit(): void {
   }
