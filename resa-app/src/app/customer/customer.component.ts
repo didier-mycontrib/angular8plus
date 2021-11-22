@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer, CustomerAccount, ResLogin } from '../common/data/customer';
-import { extractErrorMessage } from '../common/data/error';
+import { extractErrorMessage } from '../common/util/error';
 import { AccountService } from '../common/service/account.service';
 import { CustomerService } from '../common/service/customer.service';
 import { UserSessionService } from '../common/service/user-session.service';

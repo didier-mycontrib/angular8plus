@@ -8,7 +8,7 @@
             <span>{{selectedSessionId}}</span> 
         </bsu-my-fg-label>
         <bsu-my-fg-label label="nbPlaces">
-            <input type="text" class="form-control" required minlength="3"
+            <input type="text" class="form-control" required
                    name="nbPlaces" [(ngModel)]="reservation.nbPlaces" /> 
         </bsu-my-fg-label> 
         <bsu-my-fg-label label="action">
@@ -18,3 +18,13 @@
         </bsu-my-fg-label> 
     </fieldset>
 </form>
+<hr/>
+<span [ngClass]="lastStatusClasses()">{{message}}</span>
+<hr/>
+<table border="1">
+    <tr><th>idResa</th><th>nbPlaces</th><th>datetime</th><th>session</th></tr>
+    <tr *ngFor="let r of listeReservations">
+        <td>{{r.id}}</td><td>{{r.nbPlaces}}</td>
+        <td>{{r.datetime}}</td><td>{{r.session}}</td>
+    </tr>
+</table>

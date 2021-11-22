@@ -8,7 +8,7 @@ import { Customer } from '../data/customer';
 })
 export class CustomerService {
   //private _apiBaseUrl ="http://localhost:8231/customer-api"; 
-  private _apiBaseUrl ="./customer-api"; //with ng serve --proxy-config proxy.conf.json
+  private _apiBaseUrl ="/customer-api"; //with ng serve --proxy-config proxy.conf.json
   private _headers = new HttpHeaders({'Content-Type': 'application/json'});
   
   constructor(private _http : HttpClient){}
