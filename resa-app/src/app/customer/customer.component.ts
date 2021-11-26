@@ -19,12 +19,15 @@ export class CustomerComponent implements OnInit {
   customerAccount : CustomerAccount = new CustomerAccount();
   customerId : string|null = null;
   mode : MODE = "notSelected";
+  selectedSessionId:string="none"; //just for hyperlink proposal
 
   constructor(private _userSessionService :UserSessionService,
               private _customerService : CustomerService,
               private _accountService : AccountService) {
     this.customerId = this._userSessionService.bsCustomerId$.value;
+    this.selectedSessionId = this._userSessionService.bsSelectedSessionId$.value;
    }
+
   onSelectMode(mode : MODE){
     this.mode = mode;
   }
@@ -45,6 +48,7 @@ export class CustomerComponent implements OnInit {
   onLogin(){
     this.lastStatus=""; this.message=""
     //1. poster customerAccount (username,password) à verifier (login)
+    console.log("1. postLogin , login="+JSON.stringify(this.customerAccount));
     this._accountService.postLogin$(this.customerAccount)
         .subscribe((resLogin : ResLogin)=>{
                         this.lastStatus="success";
@@ -59,9 +63,11 @@ export class CustomerComponent implements OnInit {
 
   getCustomerFromCheckedUsername(username:string){
     //2 recuperer infos "customer" selon username
+    console.log("2. getCustomerByUsername , username="+username);
     this._customerService.getCustomerByUsername$(username)
               .subscribe((customers)=>{
                              this.customer = customers[0];
+                             console.log("3. authenticated customer ="+JSON.stringify(this.customer));
                              this.customerId = this.customer.id;
                              this._userSessionService.setCustomerId(this.customerId);
                            },
@@ -76,6 +82,7 @@ export class CustomerComponent implements OnInit {
     this._userSessionService.setCustomerId(this.customerId);
     this.customer = new Customer();
     this.customerAccount = new CustomerAccount();
+    sessionStorage.removeItem("access_token");
   }
 
   onNewAccount(){

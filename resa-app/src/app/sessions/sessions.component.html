@@ -15,3 +15,5 @@
       <td>{{s.unitPrice}}</td><td>{{s.description}}</td><!--<td>{{s.maxNbPlaces}}</td>-->
     </tr>
 </table>
+<a routerLink="/ngr-customer" *ngIf="selectedSessionId!='none' && customerId ==null">customer login</a> 
+<a routerLink="/ngr-reservations" *ngIf="selectedSessionId!='none' && customerId !=null">make reservation</a> <br/>

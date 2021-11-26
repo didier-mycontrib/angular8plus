@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Customer } from '../data/customer';
 import { Session } from '../data/session';
 
-//Simple cache (in memory map (v1))
+//Simple cache <id,Entity> (in memory map (v1))
 
 @Injectable({
   providedIn: 'root'

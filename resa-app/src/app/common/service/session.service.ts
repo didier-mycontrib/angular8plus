@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Session } from '../data/session';
 import { Observable } from 'rxjs';
+import { CacheService } from './cache.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,8 @@ export class SessionService {
   //private _apiBaseUrl ="/session-api"; is better than "./session-api"; in prod with <base href=".">
   private _apiBaseUrl ="/session-api"; //with ng serve --proxy-config proxy.conf.json
 
-  constructor(private _http : HttpClient){}
+  constructor(private _http : HttpClient,
+              private _cacheService : CacheService){}
 
   public getAllSessions$() : Observable<Session[]>{
 
@@ -30,10 +33,13 @@ export class SessionService {
     console.log("urlEncodedStr="+urlEncodedStr);
     var str = decodeURIComponent(urlEncodedStr);
     console.log("str="+str);
-    let url = this._apiBaseUrl + "/public-session" + "?p="+sEnBase64;
+    let url = this._apiBaseUrl + "/public/session" + "?p="+sEnBase64;
 */
-    let url = this._apiBaseUrl + "/public-session" ;
+    let url = this._apiBaseUrl + "/public/session" ;
     console.log( "url = " + url);
-    return this._http.get<Session[]>(url);
+    return this._http.get<Session[]>(url)
+    .pipe(
+      tap( (sessions)=> sessions.forEach(s=>this._cacheService.storeSessionInCache(s)))
+    );
   }
 }

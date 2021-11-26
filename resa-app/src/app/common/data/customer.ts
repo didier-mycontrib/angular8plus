@@ -2,6 +2,7 @@ export interface ResLogin {
      username :string ;
      status :boolean;
      message :string;
+     token? : any;
 }
 
 /*

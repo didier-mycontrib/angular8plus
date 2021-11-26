@@ -98,3 +98,6 @@
     {{customer | json}} <br/>
     <button (click)="onLogout()">logout</button>
 </div>
+
+<a routerLink="/ngr-sessions" *ngIf="selectedSessionId=='none' && customerId !=null">choose a session</a> 
+<a routerLink="/ngr-reservations" *ngIf="selectedSessionId!='none' && customerId !=null">make reservation</a> <br/>

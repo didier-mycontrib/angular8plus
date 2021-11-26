@@ -34,6 +34,9 @@ export class ReservationsComponent implements OnInit {
     if(this.customerId){
        this.customer = <Customer> this._cacheService.getCustomerFromCache(this.customerId);
     }
+    if(this.selectedSessionId){
+      this.session = <Session> this._cacheService.getSessionFromCache(this.selectedSessionId);
+    }
     //...
     this.retreiveReservationsOfCustomer();
   }
@@ -48,6 +51,12 @@ export class ReservationsComponent implements OnInit {
     }
   }
 
+  sessionDetails(sessionId:string): string {
+    let aSession = <Session> this._cacheService.getSessionFromCache(sessionId);
+    let details=aSession?(aSession.title+" "+aSession.date+" "+aSession.startTime):"";
+    return details;
+  }
+
   onResa(){
     if(this.customerId && this.selectedSessionId){
       this.reservation.customer=this.customerId;
@@ -57,6 +66,9 @@ export class ReservationsComponent implements OnInit {
                 .subscribe((savedReservation)=>{
                                 this.lastStatus="success";
                                 this.message="new reservation successfuly saved";
+                                this.selectedSessionId='none';
+                                this.session=null;
+                                this._userSessionService.setSelectedSessionId('none'); //not 2 times same resa
                                 this.retreiveReservationsOfCustomer();
                              },
                             (err)=>{console.log(err);
