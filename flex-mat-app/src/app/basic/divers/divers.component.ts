@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatInput } from '@angular/material/input';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { ExampleDialogComponent } from './example-dialog/example-dialog.component';
 
 @Component({
@@ -11,6 +14,25 @@ export class DiversComponent implements OnInit {
   pending : boolean = true;
   animal: string;
   name: string;
+
+  valeurChoisie="";
+  options = [ "un" , "deux" , "trois"];
+  filteredOptions: string[];
+
+
+onValueChanged(){
+  console.log("new value="+this.valeurChoisie);
+  this.filteredOptions = this._filter(this.valeurChoisie);
+}
+
+  ngOnInit() {
+    this.onValueChanged();
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
 
   constructor(public dialog: MatDialog) {}
 
@@ -31,7 +53,6 @@ export class DiversComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-  }
+ 
 
 }

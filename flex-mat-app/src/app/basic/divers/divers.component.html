@@ -1,3 +1,20 @@
+
+<input type="text"
+placeholder="Pick one"
+aria-label="Number"
+matInput
+[(ngModel)]="valeurChoisie"
+(ngModelChange)="onValueChanged()"
+[matAutocomplete]="auto">
+
+<mat-autocomplete #auto="matAutocomplete">
+  <mat-option *ngFor="let option of  filteredOptions"
+              [value]="option">
+    {{option}}
+  </mat-option>
+</mat-autocomplete>
+valeurChoisie = {{valeurChoisie}}
+<hr/>
 <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>

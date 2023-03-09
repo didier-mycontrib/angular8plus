@@ -20,7 +20,8 @@ export class SessionService {
   initOAuthServiceForCodeFlow(){
     const authCodeFlowConfig: AuthConfig = {
       // Url of the Identity Provider
-      issuer: 'http://localhost:8989/auth/realms/myrealm',
+      issuer: 'http://localhost:8989/realms/myrealm',
+      //for old v14 of keycloack ---> issuer: 'http://localhost:8989/auth/realms/myrealm',
   
       // URL of the SPA to redirect the user to after login
       redirectUri: window.location.origin + "/ngr-loggedIn",
