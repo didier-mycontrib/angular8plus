@@ -36,7 +36,8 @@ export class SessionService {
       // clientId: 'server.code',
       clientId: 'webappclient2',
       //clientSecret if necessary (not very useful for web SPA)
-      //dummyClientSecret: 'ee3f886b-0b4d-4529-9d0c-e61ca4b91d96',
+      //dummyClientSecret is required if client not public (client authentication: on + credential in keycloak)
+	  //dummyClientSecret: 'DMzPzIV2OQAphSbR84D7ebwxjrUNBgq5' ,
       responseType: 'code',
   
       // set the scope for the permissions the client should request
